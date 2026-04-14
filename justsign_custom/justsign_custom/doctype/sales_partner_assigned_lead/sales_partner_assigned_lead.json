@@ -1,0 +1,164 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-10 17:31:43.898878",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "document_id",
+  "document_type",
+  "lead_type",
+  "column_break_uxhm",
+  "sales_partner",
+  "sales_partner_type",
+  "email_id",
+  "sales_partner_mobile_number",
+  "sales_partner_customer",
+  "section_break_elrs",
+  "lead_name",
+  "lead_city",
+  "lead_status",
+  "lead_mobile_no",
+  "lead_comments",
+  "column_break_ctjr",
+  "lead_email",
+  "lead_pincode",
+  "lead_brand",
+  "opportunity_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "label": "Document Type",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "sales_partner",
+   "fieldtype": "Link",
+   "label": "Sales Partner",
+   "options": "Sales Partner"
+  },
+  {
+   "fieldname": "document_id",
+   "fieldtype": "Dynamic Link",
+   "label": "Document ID",
+   "options": "document_type"
+  },
+  {
+   "fetch_from": "sales_partner.custom_email",
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "label": "Email Id"
+  },
+  {
+   "fetch_from": "sales_partner.partner_type",
+   "fieldname": "sales_partner_type",
+   "fieldtype": "Data",
+   "label": "Sales Partner Type"
+  },
+  {
+   "fieldname": "lead_type",
+   "fieldtype": "Data",
+   "label": "Lead Type"
+  },
+  {
+   "fieldname": "sales_partner_mobile_number",
+   "fieldtype": "Data",
+   "label": "Sales Partner Mobile Number"
+  },
+  {
+   "fieldname": "column_break_uxhm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead_name",
+   "fieldtype": "Data",
+   "label": "Lead Name"
+  },
+  {
+   "fieldname": "section_break_elrs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ctjr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead_email",
+   "fieldtype": "Data",
+   "label": "Lead Email"
+  },
+  {
+   "fieldname": "lead_city",
+   "fieldtype": "Data",
+   "label": "Lead City"
+  },
+  {
+   "fieldname": "lead_status",
+   "fieldtype": "Data",
+   "label": "Lead Status"
+  },
+  {
+   "fieldname": "lead_comments",
+   "fieldtype": "Small Text",
+   "label": "Lead Comments"
+  },
+  {
+   "fieldname": "lead_pincode",
+   "fieldtype": "Data",
+   "label": "Lead PinCode"
+  },
+  {
+   "fieldname": "lead_brand",
+   "fieldtype": "Data",
+   "label": "Lead Brand"
+  },
+  {
+   "fieldname": "lead_mobile_no",
+   "fieldtype": "Data",
+   "label": "Lead Mobile No"
+  },
+  {
+   "fieldname": "sales_partner_customer",
+   "fieldtype": "Link",
+   "label": "Sales Partner Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "opportunity_id",
+   "fieldtype": "Link",
+   "label": "Opportunity Id",
+   "options": "Opportunity"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Opportunity",
+   "link_fieldname": "custom_sales_partner_name"
+  }
+ ],
+ "modified": "2025-07-28 13:16:21.865816",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Sales Partner Assigned Lead",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

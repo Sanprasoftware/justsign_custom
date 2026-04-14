@@ -1,0 +1,141 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{customer}-{vehicle_no}",
+ "creation": "2025-02-01 00:00:56.672709",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "package_amount",
+  "column_break_wsoy",
+  "customer",
+  "column_break_ojvl",
+  "vehicle_no",
+  "section_break_hogu",
+  "valid_till",
+  "column_break_spie",
+  "status",
+  "section_break_koqd",
+  "book_package_item",
+  "si_id",
+  "mobile_number",
+  "car_brand",
+  "car_model"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wsoy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_koqd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ojvl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "label": "Vehicle No",
+   "options": "Customer Wise Vehicle",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "si_id",
+   "fieldtype": "Link",
+   "label": "SI ID",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "book_package_item",
+   "fieldtype": "Table",
+   "label": "Book Package Item",
+   "options": "Book Package Item"
+  },
+  {
+   "fieldname": "package_amount",
+   "fieldtype": "Float",
+   "label": "Package Amount",
+   "precision": "2"
+  },
+  {
+   "fetch_from": "customer.mobile_no",
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "label": "Mobile Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "vehicle_no.brand",
+   "fieldname": "car_brand",
+   "fieldtype": "Data",
+   "label": "Car Brand",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "vehicle_no.model",
+   "fieldname": "car_model",
+   "fieldtype": "Data",
+   "label": "Car Model",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_hogu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "valid_till",
+   "fieldtype": "Date",
+   "label": "Valid Till",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_spie",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nExpire",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-01-09 18:22:11.383913",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Book Package",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

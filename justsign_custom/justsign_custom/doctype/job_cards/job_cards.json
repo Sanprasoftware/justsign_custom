@@ -1,0 +1,323 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2025-02-17 12:40:07.850511",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_kwse",
+  "naming_series",
+  "customer",
+  "customer_name",
+  "column_break_jgch",
+  "date",
+  "vehicle_details",
+  "amended_from",
+  "expected_delivery_date",
+  "column_break_maze",
+  "document_type",
+  "document_id",
+  "column_break_vrxq",
+  "status",
+  "completed_by",
+  "section_break_ccsu",
+  "schedule_date",
+  "column_break_jflo",
+  "installer",
+  "vehicle_details_section",
+  "vehicle_type",
+  "column_break_zzii",
+  "brand",
+  "column_break_hzgz",
+  "model",
+  "column_break_uytn",
+  "category",
+  "column_break_jwib",
+  "color",
+  "column_break_wqbj",
+  "vin_number",
+  "section_break_wbbt",
+  "items",
+  "mobile_number",
+  "ovm_tab",
+  "installer_name",
+  "showroom_name",
+  "column_break_ergq",
+  "brand_name",
+  "work_status",
+  "section_break_dngg",
+  "comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_kwse",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Job Cards",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "JC-.###."
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "column_break_jgch",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "vehicle_details",
+   "fieldtype": "Link",
+   "label": "Vehicle Details",
+   "options": "Customer Wise Vehicle"
+  },
+  {
+   "fieldname": "section_break_wbbt",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Job Card Items"
+  },
+  {
+   "fieldname": "column_break_vrxq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nIn Progress\nWashing\nDetailing\nTreatement\nPost Treatment Cleaning\nInspection\nDelivery\nCompleted\nAcknowledge"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "vehicle_details_section",
+   "fieldtype": "Section Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fetch_from": "vehicle_details.vehicle_type",
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "label": "Vehicle Type",
+   "options": "Bike\nCar"
+  },
+  {
+   "fieldname": "column_break_zzii",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_details.brand",
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand"
+  },
+  {
+   "fieldname": "column_break_hzgz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_details.model",
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fieldname": "column_break_uytn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_details.category",
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Category"
+  },
+  {
+   "fieldname": "column_break_jwib",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_details.color",
+   "fieldname": "color",
+   "fieldtype": "Data",
+   "label": "Color"
+  },
+  {
+   "fieldname": "column_break_wqbj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "vehicle_details.vin_number",
+   "fieldname": "vin_number",
+   "fieldtype": "Data",
+   "label": "Vin Number"
+  },
+  {
+   "depends_on": "eval:doc.status == 'Completed'",
+   "fieldname": "completed_by",
+   "fieldtype": "Link",
+   "label": "Completed By",
+   "mandatory_depends_on": "eval:doc.status == 'Completed'",
+   "options": "User"
+  },
+  {
+   "fieldname": "expected_delivery_date",
+   "fieldtype": "Date",
+   "label": "Expected Delivery Date"
+  },
+  {
+   "fieldname": "column_break_maze",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "label": "Document Type",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "document_id",
+   "fieldtype": "Dynamic Link",
+   "label": "Document ID",
+   "options": "document_type"
+  },
+  {
+   "fetch_from": "customer.mobile_no",
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "label": "Mobile Number"
+  },
+  {
+   "fieldname": "ovm_tab",
+   "fieldtype": "Tab Break",
+   "label": "OVM"
+  },
+  {
+   "fieldname": "installer_name",
+   "fieldtype": "Link",
+   "label": "Installer Name",
+   "options": "User"
+  },
+  {
+   "fieldname": "showroom_name",
+   "fieldtype": "Link",
+   "label": "Showroom Name",
+   "options": "Showroom"
+  },
+  {
+   "fieldname": "column_break_ergq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "brand_name",
+   "fieldtype": "Link",
+   "label": "Brand Name",
+   "options": "Sales Partner Assigned Lead"
+  },
+  {
+   "fieldname": "work_status",
+   "fieldtype": "Select",
+   "label": "Work Status",
+   "options": "\nPending\nIn Process\nComplete\nWork Done"
+  },
+  {
+   "fieldname": "section_break_dngg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Long Text",
+   "label": "Comment"
+  },
+  {
+   "fieldname": "section_break_ccsu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "schedule_date",
+   "fieldtype": "Datetime",
+   "label": "Schedule Date"
+  },
+  {
+   "fieldname": "column_break_jflo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "installer",
+   "fieldtype": "Link",
+   "label": "Installer",
+   "options": "User"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Payment Entry",
+   "link_fieldname": "custom_job_cards"
+  }
+ ],
+ "modified": "2025-11-28 14:07:42.044248",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Job Cards",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Green",
+   "title": "Completed"
+  },
+  {
+   "color": "Orange",
+   "title": "In Progress"
+  }
+ ]
+}

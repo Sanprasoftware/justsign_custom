@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-08-30 11:48:25.067296",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "showroom_name",
+  "column_break_exwk",
+  "address",
+  "section_break_mupt",
+  "brands"
+ ],
+ "fields": [
+  {
+   "fieldname": "showroom_name",
+   "fieldtype": "Data",
+   "label": "Showroom Name"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "fieldname": "brands",
+   "fieldtype": "Table",
+   "label": "Brands",
+   "options": "Showroom Child Table"
+  },
+  {
+   "fieldname": "column_break_exwk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_mupt",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-08-30 11:51:35.078075",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Showroom",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

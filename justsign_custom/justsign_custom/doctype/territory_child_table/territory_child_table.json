@@ -1,0 +1,37 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-24 11:30:16.216949",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "territory_data_section",
+  "id"
+ ],
+ "fields": [
+  {
+   "fieldname": "territory_data_section",
+   "fieldtype": "Section Break",
+   "label": "Territory Data"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Link",
+   "label": "ID",
+   "options": "Territory"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-24 11:31:03.788160",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Territory Child Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

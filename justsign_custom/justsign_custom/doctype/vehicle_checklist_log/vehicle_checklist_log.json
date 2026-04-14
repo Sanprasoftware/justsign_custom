@@ -1,0 +1,1268 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{vehicle_no}-{delivery_not_id}",
+ "creation": "2025-01-31 22:16:01.001482",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_no",
+  "delivery_not_id",
+  "column_break_vkzf",
+  "date",
+  "amended_from",
+  "section_break_ajfx",
+  "column_break_jkfv",
+  "hood",
+  "scratches",
+  "dents",
+  "upload_image",
+  "no_issue",
+  "remarks",
+  "column_break_wtbd",
+  "trunk",
+  "scratches1",
+  "dents1",
+  "upload_image1",
+  "no_issue1",
+  "remark1",
+  "column_break_vfrq",
+  "roof",
+  "scratches2",
+  "dents2",
+  "upload_image2",
+  "no_issue2",
+  "remark2",
+  "column_break_zeda",
+  "doors",
+  "scratches3",
+  "dents3",
+  "upload_image3",
+  "no_issue3",
+  "remark3",
+  "column_break_vvwn",
+  "bumpers",
+  "scratches4",
+  "dents4",
+  "upload_image4",
+  "no_issue4",
+  "remark4",
+  "column_break_hdeo",
+  "fenders",
+  "scratches5",
+  "dents5",
+  "upload_image5",
+  "no_issue5",
+  "remark5",
+  "section_break_rezw",
+  "quarter_panels",
+  "scratches6",
+  "dents6",
+  "upload_image6",
+  "no_issue6",
+  "remarks6",
+  "column_break_jztr",
+  "grille",
+  "scratches7",
+  "dents7",
+  "upload_image7",
+  "no_issue7",
+  "remarks7",
+  "column_break_ztln",
+  "mirrors",
+  "scratches8",
+  "dents8",
+  "upload_image8",
+  "no_issue8",
+  "remarks8",
+  "column_break_icad",
+  "windows",
+  "scratches9",
+  "dents9",
+  "upload_image9",
+  "no_issue9",
+  "remarks9",
+  "column_break_onjw",
+  "wheel_wells",
+  "scratches10",
+  "dents10",
+  "upload_image10",
+  "no_issue10",
+  "remarks10",
+  "column_break_okpl",
+  "headlights_taillights",
+  "scratches11",
+  "dents11",
+  "upload_image11",
+  "no_issue11",
+  "remarks11",
+  "section_break_vvrt",
+  "windshield",
+  "damaged",
+  "no_damage",
+  "upload_image12",
+  "remarks12",
+  "column_break_wtyl",
+  "rear_window",
+  "damaged1",
+  "no_damage1",
+  "upload_image13",
+  "remarks17",
+  "column_break_mjxj",
+  "side_windows",
+  "damaged2",
+  "no_damage2",
+  "upload_image14",
+  "remarks13",
+  "column_break_mtum",
+  "sunroof_moonroof",
+  "damaged3",
+  "no_damage3",
+  "upload_image15",
+  "remarks14",
+  "column_break_hixa",
+  "mirrors_side_and_rearview",
+  "damaged4",
+  "no_damage4",
+  "upload_image16",
+  "remarks15",
+  "column_break_jguc",
+  "light_covers_headlight_and_taillight",
+  "damaged5",
+  "no_damage5",
+  "upload_image17",
+  "remarks16",
+  "section_break_bnhu",
+  "seats_and_upholstery",
+  "damaged6",
+  "no_damage6",
+  "upload_image18",
+  "remarks18",
+  "column_break_onmj",
+  "dashboard_and_console",
+  "damaged7",
+  "no_damage7",
+  "upload_image19",
+  "remarks19",
+  "column_break_pjmz",
+  "roof1",
+  "damaged8",
+  "no_damage8",
+  "upload_image20",
+  "remarks20",
+  "column_break_lyhy",
+  "tire",
+  "damaged9",
+  "no_damage9",
+  "upload_image21",
+  "remarks21",
+  "column_break_fxnp",
+  "alloy",
+  "damaged10",
+  "no_damage10",
+  "upload_image22",
+  "remarks22",
+  "column_break_xfzg",
+  "spare_wheel",
+  "damaged11",
+  "no_damage11",
+  "upload_image23",
+  "remarks23",
+  "accessories_and_engine_section",
+  "floor_matt",
+  "available",
+  "not_available",
+  "remarks24",
+  "column_break_zrup",
+  "car_manual",
+  "available1",
+  "not_available1",
+  "remarks25",
+  "column_break_cnyx",
+  "dashboard_accessories",
+  "available2",
+  "not_available2",
+  "remarks26",
+  "column_break_dcwa",
+  "toolkit",
+  "available3",
+  "not_available3",
+  "remarks27",
+  "column_break_lfom",
+  "engine_bay_cleanliness",
+  "not_cleaned",
+  "cleaned",
+  "remark28",
+  "column_break_duyd",
+  "battery",
+  "upload_photo",
+  "remark29"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Link",
+   "label": "Vehicle No",
+   "options": "Customer Wise Vehicle"
+  },
+  {
+   "fieldname": "column_break_vkzf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "delivery_not_id",
+   "fieldtype": "Link",
+   "label": "Job Card ID",
+   "options": "Job Cards"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Vehicle Checklist Log",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_ajfx",
+   "fieldtype": "Section Break",
+   "label": "Extrerior"
+  },
+  {
+   "fieldname": "hood",
+   "fieldtype": "Heading",
+   "label": "Hood"
+  },
+  {
+   "fieldname": "column_break_jkfv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "fieldname": "column_break_wtbd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "fieldname": "column_break_vfrq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "column_break_zeda",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "trunk",
+   "fieldtype": "Heading",
+   "label": "Trunk"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches1",
+   "fieldtype": "Check",
+   "label": "Scratches1"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents1",
+   "fieldtype": "Check",
+   "label": "Dents1"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue1",
+   "fieldtype": "Check",
+   "label": "No Issue1"
+  },
+  {
+   "fieldname": "remark1",
+   "fieldtype": "Data",
+   "label": "Remark1"
+  },
+  {
+   "fieldname": "roof",
+   "fieldtype": "Heading",
+   "label": "Roof"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches2",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents2",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue2",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "remark2",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "doors",
+   "fieldtype": "Heading",
+   "label": "Doors"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches3",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents3",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue3",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "remark3",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "column_break_vvwn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bumpers",
+   "fieldtype": "Heading",
+   "label": "Bumpers"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches4",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents4",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue4",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "remark4",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "column_break_hdeo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "fenders",
+   "fieldtype": "Heading",
+   "label": "Fenders"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches5",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents5",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue5",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "remark5",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_rezw",
+   "fieldtype": "Section Break",
+   "label": "Extrerior"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches6",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents6",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue6",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "column_break_jztr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches7",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents7",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue7",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "column_break_ztln",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches8",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents8",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue8",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "column_break_icad",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches9",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents9",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue9",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "column_break_onjw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches10",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents10",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue10",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "column_break_okpl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "scratches11",
+   "fieldtype": "Check",
+   "label": "Scratches"
+  },
+  {
+   "default": "0",
+   "fieldname": "dents11",
+   "fieldtype": "Check",
+   "label": "Dents"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_issue11",
+   "fieldtype": "Check",
+   "label": "No Issue"
+  },
+  {
+   "fieldname": "quarter_panels",
+   "fieldtype": "Heading",
+   "label": "Quarter Panels"
+  },
+  {
+   "fieldname": "remarks6",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "grille",
+   "fieldtype": "Heading",
+   "label": "Grille"
+  },
+  {
+   "fieldname": "remarks7",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "mirrors",
+   "fieldtype": "Heading",
+   "label": "Mirrors"
+  },
+  {
+   "fieldname": "remarks8",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "windows",
+   "fieldtype": "Heading",
+   "label": "Windows "
+  },
+  {
+   "fieldname": "remarks9",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "wheel_wells",
+   "fieldtype": "Heading",
+   "label": "Wheel Wells"
+  },
+  {
+   "fieldname": "remarks10",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "headlights_taillights",
+   "fieldtype": "Heading",
+   "label": "Headlights Taillights"
+  },
+  {
+   "fieldname": "remarks11",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_vvrt",
+   "fieldtype": "Section Break",
+   "label": "Glass"
+  },
+  {
+   "fieldname": "windshield",
+   "fieldtype": "Heading",
+   "label": "Windshield"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged",
+   "fieldtype": "Check",
+   "label": "Damage"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "remarks12",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_wtyl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rear_window",
+   "fieldtype": "Heading",
+   "label": "Rear Window"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged1",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage1",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "remarks17",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_mjxj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "side_windows",
+   "fieldtype": "Heading",
+   "label": "Side Windows"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged2",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage2",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "remarks13",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_mtum",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sunroof_moonroof",
+   "fieldtype": "Heading",
+   "label": "Sunroof Moonroof"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged3",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage3",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "remarks14",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_hixa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mirrors_side_and_rearview",
+   "fieldtype": "Heading",
+   "label": "Mirrors Side and Rearview"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged4",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage4",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "remarks15",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_jguc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "light_covers_headlight_and_taillight",
+   "fieldtype": "Heading",
+   "label": "Light Covers Headlight &Taillight"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged5",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage5",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "remarks16",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "section_break_bnhu",
+   "fieldtype": "Section Break",
+   "label": "Interior And Tire & Alloy"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged6",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage6",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "column_break_onmj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged7",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage7",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "column_break_pjmz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged8",
+   "fieldtype": "Check",
+   "label": "Damage"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage8",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "column_break_lyhy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged9",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage9",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "column_break_fxnp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged10",
+   "fieldtype": "Check",
+   "label": "Damaged"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage10",
+   "fieldtype": "Check",
+   "label": "No Damage"
+  },
+  {
+   "fieldname": "column_break_xfzg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "damaged11",
+   "fieldtype": "Check",
+   "label": "Available"
+  },
+  {
+   "default": "0",
+   "fieldname": "no_damage11",
+   "fieldtype": "Check",
+   "label": "Not Available"
+  },
+  {
+   "fieldname": "remarks18",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks19",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks20",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks21",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks22",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "remarks23",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "seats_and_upholstery",
+   "fieldtype": "Heading",
+   "label": "Seats & Upholstery"
+  },
+  {
+   "fieldname": "dashboard_and_console",
+   "fieldtype": "Heading",
+   "label": "Dashboard Console"
+  },
+  {
+   "fieldname": "roof1",
+   "fieldtype": "Heading",
+   "label": "Roof1"
+  },
+  {
+   "fieldname": "tire",
+   "fieldtype": "Heading",
+   "label": "Tire"
+  },
+  {
+   "fieldname": "alloy",
+   "fieldtype": "Heading",
+   "label": "Alloy"
+  },
+  {
+   "fieldname": "spare_wheel",
+   "fieldtype": "Heading",
+   "label": "Spare Wheel "
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "accessories_and_engine_section",
+   "fieldtype": "Section Break",
+   "label": "Accessories and Engine"
+  },
+  {
+   "fieldname": "floor_matt",
+   "fieldtype": "Heading",
+   "label": "Floor Matt"
+  },
+  {
+   "default": "0",
+   "fieldname": "available",
+   "fieldtype": "Check",
+   "label": "Available"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_available",
+   "fieldtype": "Check",
+   "label": "Not Available"
+  },
+  {
+   "fieldname": "remarks24",
+   "fieldtype": "Data",
+   "label": "Remarks24"
+  },
+  {
+   "fieldname": "column_break_zrup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "car_manual",
+   "fieldtype": "Heading",
+   "label": "Car Manual"
+  },
+  {
+   "default": "0",
+   "fieldname": "available1",
+   "fieldtype": "Check",
+   "label": "Available1"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_available1",
+   "fieldtype": "Check",
+   "label": "Not Available1"
+  },
+  {
+   "fieldname": "remarks25",
+   "fieldtype": "Data",
+   "label": "Remarks25"
+  },
+  {
+   "fieldname": "column_break_cnyx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dashboard_accessories",
+   "fieldtype": "Heading",
+   "label": "Dashboard Accessories "
+  },
+  {
+   "default": "0",
+   "fieldname": "available2",
+   "fieldtype": "Check",
+   "label": "Available"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_available2",
+   "fieldtype": "Check",
+   "label": "Not Available"
+  },
+  {
+   "fieldname": "remarks26",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_dcwa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "toolkit",
+   "fieldtype": "Heading",
+   "label": "Toolkit"
+  },
+  {
+   "default": "0",
+   "fieldname": "available3",
+   "fieldtype": "Check",
+   "label": "Available"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_available3",
+   "fieldtype": "Check",
+   "label": "Not Available"
+  },
+  {
+   "fieldname": "remarks27",
+   "fieldtype": "Data",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_lfom",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "engine_bay_cleanliness",
+   "fieldtype": "Heading",
+   "label": "Engine Bay Cleanliness"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_cleaned",
+   "fieldtype": "Check",
+   "label": "Not Cleaned"
+  },
+  {
+   "default": "0",
+   "fieldname": "cleaned",
+   "fieldtype": "Check",
+   "label": "Cleaned"
+  },
+  {
+   "fieldname": "remark28",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "column_break_duyd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "battery",
+   "fieldtype": "Heading",
+   "label": "Battery"
+  },
+  {
+   "fieldname": "upload_photo",
+   "fieldtype": "Attach Image",
+   "label": "Upload Photo"
+  },
+  {
+   "fieldname": "remark29",
+   "fieldtype": "Data",
+   "label": "Remark"
+  },
+  {
+   "depends_on": "eval:doc.dents == 1 || doc.scratches == 1",
+   "fieldname": "upload_image",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.dents1 == 1 || doc.scratches1 == 1",
+   "fieldname": "upload_image1",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image1"
+  },
+  {
+   "depends_on": "eval:doc.dents2 == 1 || doc.scratches2 ==1",
+   "fieldname": "upload_image2",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image2"
+  },
+  {
+   "depends_on": "eval:doc.dents3 == 1 || doc.scratches3 == 1",
+   "fieldname": "upload_image3",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image3"
+  },
+  {
+   "depends_on": "eval:doc.dents4 == 1 || doc.scratches4 ==1",
+   "fieldname": "upload_image4",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image4"
+  },
+  {
+   "depends_on": "eval:doc.dents5 == 1 || doc.scratches5 ==1",
+   "fieldname": "upload_image5",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image5"
+  },
+  {
+   "depends_on": "eval:doc.dents6 == 1 || doc.scratches6 == 1",
+   "fieldname": "upload_image6",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.dents7 == 1 || doc.scratches7 == 1",
+   "fieldname": "upload_image7",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.dents8 == 1 || doc.scratches8 == 1",
+   "fieldname": "upload_image8",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.dents9 == 1 || doc.scratches9 == 1",
+   "fieldname": "upload_image9",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.dents10 == 1 || doc.scratches10 == 1",
+   "fieldname": "upload_image10",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.dents11 == 1 || doc.scratches11 == 1",
+   "fieldname": "upload_image11",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged == 1 || doc.no_damage == 1",
+   "fieldname": "upload_image12",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged1 == 1 || doc.no_damage1 == 1",
+   "fieldname": "upload_image13",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged2 == 1 || doc.no_damage2 == 1",
+   "fieldname": "upload_image14",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged3 == 1 || doc.no_damage3 == 1",
+   "fieldname": "upload_image15",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged4 == 1 || doc.no_damage4 == 1",
+   "fieldname": "upload_image16",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged5 == 1 || doc.no_damage5 == 1",
+   "fieldname": "upload_image17",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged6 == 1 || doc.no_damage6 == 1",
+   "fieldname": "upload_image18",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged7 == 1 || doc.no_damage7 == 1",
+   "fieldname": "upload_image19",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged8 == 1 || doc.no_damage8 == 1",
+   "fieldname": "upload_image20",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged9 == 1 || doc.no_damage9 == 1",
+   "fieldname": "upload_image21",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  },
+  {
+   "depends_on": "eval:doc.damaged10 == 1 || doc.no_damage10 == 1",
+   "fieldname": "upload_image22",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image "
+  },
+  {
+   "depends_on": "eval:doc.damaged11 == 1 || doc.no_damage11 == 1",
+   "fieldname": "upload_image23",
+   "fieldtype": "Attach Image",
+   "label": "Upload Image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2025-03-31 15:09:00.789792",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Vehicle Checklist Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

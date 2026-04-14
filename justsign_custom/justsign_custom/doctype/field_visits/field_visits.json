@@ -1,0 +1,221 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2025-11-25 10:18:40.674114",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "plan_visit_id",
+  "column_break_ejec",
+  "allocated_to",
+  "visited_by",
+  "section_break_oumy",
+  "doctype_name",
+  "name1",
+  "start_time",
+  "start",
+  "end_time",
+  "end",
+  "meeting_span",
+  "attach_files",
+  "status",
+  "column_break_omlp",
+  "id",
+  "phone",
+  "email",
+  "outcome",
+  "contact_person_name",
+  "contact_person_number",
+  "review",
+  "remark",
+  "amended_from",
+  "section_break_gqfw",
+  "opportunity_table"
+ ],
+ "fields": [
+  {
+   "fieldname": "plan_visit_id",
+   "fieldtype": "Link",
+   "label": "Plan Visit Id",
+   "options": "Plan Visit"
+  },
+  {
+   "fieldname": "column_break_ejec",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_oumy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "doctype_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Doctype Name",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Name"
+  },
+  {
+   "fieldname": "start_time",
+   "fieldtype": "Button",
+   "label": "Start Time"
+  },
+  {
+   "fieldname": "start",
+   "fieldtype": "Datetime",
+   "label": "Start"
+  },
+  {
+   "fieldname": "end_time",
+   "fieldtype": "Button",
+   "label": "End Time"
+  },
+  {
+   "fieldname": "end",
+   "fieldtype": "Datetime",
+   "label": "End"
+  },
+  {
+   "fieldname": "meeting_span",
+   "fieldtype": "Data",
+   "label": "Meeting Span"
+  },
+  {
+   "fieldname": "attach_files",
+   "fieldtype": "Attach",
+   "label": "Attach Files"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Activity Status",
+   "options": "\nPending\nStarted\nCompleted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_omlp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Id",
+   "options": "doctype_name"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "fieldname": "outcome",
+   "fieldtype": "Select",
+   "label": "Outcome",
+   "options": "Need to Follow Up\nOrder Received\nQuotation Requested"
+  },
+  {
+   "fieldname": "review",
+   "fieldtype": "Small Text",
+   "label": "Review"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Small Text",
+   "label": "Remark"
+  },
+  {
+   "fieldname": "allocated_to",
+   "fieldtype": "Link",
+   "label": "Allocated To",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Field Visits",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "visited_by",
+   "fieldtype": "Link",
+   "label": "Visited By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contact_person_name",
+   "fieldtype": "Data",
+   "label": "Contact Person Name"
+  },
+  {
+   "fieldname": "contact_person_number",
+   "fieldtype": "Data",
+   "label": "Contact Person Number"
+  },
+  {
+   "fieldname": "section_break_gqfw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opportunity_table",
+   "fieldtype": "Table",
+   "label": "Opportunity",
+   "options": "Field Visit Opportunity"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Event",
+   "link_fieldname": "reference_docname"
+  }
+ ],
+ "modified": "2026-03-07 13:30:55.948255",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Field Visits",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "name1"
+}

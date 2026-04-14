@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-17 10:08:16.608731",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "prospect_data_section",
+  "id",
+  "name1",
+  "email",
+  "phone",
+  "comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "prospect_data_section",
+   "fieldtype": "Section Break",
+   "label": "Prospect Data"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "ID",
+   "options": "Prospect"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Name"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Phone"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Comment"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-18 12:32:03.526537",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Prospect Child Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,89 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-17 10:08:16.488873",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "lead_data_section",
+  "id",
+  "name1",
+  "phone",
+  "email",
+  "lead_type",
+  "brand",
+  "status",
+  "comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "lead_data_section",
+   "fieldtype": "Section Break",
+   "label": "Lead Data"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "ID",
+   "options": "Lead"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "lead_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Lead Type"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Brand",
+   "options": "Brand"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Status"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Comment"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-17 10:08:16.488873",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Lead Child Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

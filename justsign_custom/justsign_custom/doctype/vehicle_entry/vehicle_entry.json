@@ -1,0 +1,182 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{vehicle_number}-{####}",
+ "creation": "2025-01-28 14:03:14.747843",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_number",
+  "create_vehicle",
+  "column_break_jrqu",
+  "mobile_number",
+  "column_break_pica",
+  "vehicle_type",
+  "create_veh",
+  "section_break_xyls",
+  "check_in",
+  "check_in_time",
+  "column_break_qplr",
+  "check_out",
+  "check_out_time",
+  "section_break_bsab",
+  "status",
+  "column_break_cbar",
+  "document_type",
+  "column_break_wjjl",
+  "lead",
+  "column_break_wbgd",
+  "custome_vehicle"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vehicle Number"
+  },
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "label": "Vehicle Type",
+   "options": "\nBike\nCar",
+   "reqd": 1
+  },
+  {
+   "fieldname": "check_in",
+   "fieldtype": "Button",
+   "label": "Check IN"
+  },
+  {
+   "fieldname": "check_out",
+   "fieldtype": "Button",
+   "label": "Check Out"
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Datetime",
+   "label": "Check IN Time"
+  },
+  {
+   "fieldname": "check_out_time",
+   "fieldtype": "Datetime",
+   "label": "Check Out Time"
+  },
+  {
+   "fieldname": "column_break_pica",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xyls",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_qplr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "label": "Mobile Number",
+   "length": 10
+  },
+  {
+   "depends_on": "eval: !doc.mobile_number",
+   "fieldname": "create_vehicle",
+   "fieldtype": "Button",
+   "label": "Create Lead & vehicle"
+  },
+  {
+   "fieldname": "column_break_jrqu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Dynamic Link",
+   "label": "Lead",
+   "options": "document_type",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: !doc.custome_vehicle && doc.lead",
+   "fieldname": "create_veh",
+   "fieldtype": "Button",
+   "label": "Create Vehical"
+  },
+  {
+   "fieldname": "custome_vehicle",
+   "fieldtype": "Link",
+   "label": "Custome Vehicle",
+   "options": "Customer Wise Vehicle",
+   "read_only": 1
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "label": "Document Type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Open\nCheck In\nCheck Out",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_bsab",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_cbar",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_wjjl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_wbgd",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-25 11:51:48.470452",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Vehicle Entry",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Orange",
+   "title": "Open"
+  },
+  {
+   "color": "Green",
+   "title": "Check In"
+  },
+  {
+   "color": "Yellow",
+   "title": "Check Out"
+  }
+ ]
+}

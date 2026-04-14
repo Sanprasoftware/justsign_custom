@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-10-13 12:53:39.734265",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "select_field",
+  "item",
+  "item_group",
+  "column_break_wbgk",
+  "section_break_yzaz",
+  "table_otqy"
+ ],
+ "fields": [
+  {
+   "depends_on": "eval: doc.select_field == \"Item\"",
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "depends_on": "eval: doc.select_field == \"Item Group\"",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "column_break_wbgk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_yzaz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "table_otqy",
+   "fieldtype": "Table",
+   "options": "Item Price Check Items"
+  },
+  {
+   "fieldname": "select_field",
+   "fieldtype": "Select",
+   "label": "Select Field",
+   "options": "\nItem\nItem Group"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-10-13 14:44:23.012984",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Item Price Check",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

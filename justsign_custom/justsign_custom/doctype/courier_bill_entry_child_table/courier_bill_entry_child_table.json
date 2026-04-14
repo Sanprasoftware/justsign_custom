@@ -1,0 +1,100 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-07 14:35:01.889949",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "transporter_name",
+  "docket_number",
+  "date",
+  "parcel_type",
+  "delivered_to",
+  "weight",
+  "amount_charged",
+  "reconciliation_status",
+  "link_sales_invoice",
+  "total_weight",
+  "city"
+ ],
+ "fields": [
+  {
+   "fieldname": "transporter_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Transporter Name",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "docket_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Docket Number"
+  },
+  {
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "parcel_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Parcel Type"
+  },
+  {
+   "fieldname": "delivered_to",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Delivered To"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight"
+  },
+  {
+   "fieldname": "amount_charged",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Amount Charged"
+  },
+  {
+   "fieldname": "reconciliation_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Reconciliation Status"
+  },
+  {
+   "fieldname": "link_sales_invoice",
+   "fieldtype": "Link",
+   "label": "Link Sales Invoice",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-07-09 11:36:55.517550",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Courier Bill Entry Child Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

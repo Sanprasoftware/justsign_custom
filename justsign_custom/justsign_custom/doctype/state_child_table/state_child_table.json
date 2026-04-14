@@ -1,0 +1,38 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-24 12:02:38.504970",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "states_section",
+  "state"
+ ],
+ "fields": [
+  {
+   "fieldname": "states_section",
+   "fieldtype": "Section Break",
+   "label": "States"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "label": "State",
+   "link_filters": "[[\"Territory\",\"custom_is_state\",\"=\",1]]",
+   "options": "Territory"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-24 13:37:33.625667",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "State Child Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

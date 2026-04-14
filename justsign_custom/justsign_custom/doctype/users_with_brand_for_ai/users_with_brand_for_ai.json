@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-04 13:14:52.875707",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "user",
+  "data_wnwg",
+  "seniority_level",
+  "brand"
+ ],
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "User",
+   "link_filters": "[[\"User\",\"enabled\",\"=\",1]]",
+   "options": "User"
+  },
+  {
+   "fetch_from": "user.email",
+   "fieldname": "data_wnwg",
+   "fieldtype": "Data",
+   "label": "Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Table MultiSelect",
+   "label": "Brand",
+   "options": "Brands"
+  },
+  {
+   "fieldname": "seniority_level",
+   "fieldtype": "Select",
+   "label": "Seniority Level",
+   "options": "Lower\nMiddle\nHigher"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-09-04 15:27:41.685340",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Users with Brand For AI",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

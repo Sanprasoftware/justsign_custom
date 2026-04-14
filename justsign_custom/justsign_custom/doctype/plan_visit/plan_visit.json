@@ -1,0 +1,173 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-05 11:09:14.557658",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_e2kk",
+  "amended_from",
+  "doctype_name",
+  "id",
+  "brand",
+  "posting_date",
+  "add_data",
+  "is_recurring",
+  "field_visit_frequency",
+  "column_break_pkph",
+  "form_date",
+  "to_date",
+  "territory",
+  "customer_group",
+  "prospect_customer_group",
+  "allocated_to",
+  "section_break_yqdn",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_e2kk",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Plan Visit",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "doctype_name",
+   "fieldtype": "Select",
+   "label": "Doctype Name",
+   "options": "\nLead\nProspect\nCustomer\nQuotation\nOpportunity"
+  },
+  {
+   "depends_on": "eval: doc.doctype_name == \"Lead\"|| doc.doctype_name == \"Opportunity\"",
+   "fieldname": "brand",
+   "fieldtype": "Link",
+   "label": "Brand",
+   "options": "Brand"
+  },
+  {
+   "fieldname": "column_break_pkph",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "Territory",
+   "options": "Territory"
+  },
+  {
+   "depends_on": "eval: doc.doctype_name == \"Lead\" ",
+   "fieldname": "customer_group",
+   "fieldtype": "Link",
+   "label": "Customer Group",
+   "options": "Customer Group"
+  },
+  {
+   "fieldname": "section_break_yqdn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Plan Visit Items"
+  },
+  {
+   "fieldname": "add_data",
+   "fieldtype": "Button",
+   "label": "Add Data"
+  },
+  {
+   "fieldname": "form_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Form Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "To Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_recurring",
+   "fieldtype": "Check",
+   "label": "Is Recurring"
+  },
+  {
+   "depends_on": "eval: doc.is_recurring",
+   "fieldname": "field_visit_frequency",
+   "fieldtype": "Select",
+   "label": "Field Visit Frequency",
+   "mandatory_depends_on": "eval: doc.is_recurring",
+   "options": "\nDaily\nWeekly\nMonthly"
+  },
+  {
+   "depends_on": "eval: doc.doctype_name == \"Prospect\" || doc.doctype_name == \"Customer\"",
+   "fieldname": "prospect_customer_group",
+   "fieldtype": "Link",
+   "label": "Customer Group ",
+   "options": "Customer Group"
+  },
+  {
+   "default": "Now",
+   "fieldname": "posting_date",
+   "fieldtype": "Datetime",
+   "label": "Posting Date"
+  },
+  {
+   "depends_on": "eval:frappe.user_roles.includes(\"Sales Manager\")\n",
+   "fieldname": "allocated_to",
+   "fieldtype": "Link",
+   "label": "Allocated To",
+   "options": "User"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Dynamic Link",
+   "label": "Id",
+   "options": "doctype_name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Field Visits",
+   "link_fieldname": "plan_visit_id"
+  }
+ ],
+ "modified": "2026-02-02 12:05:25.550016",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Plan Visit",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

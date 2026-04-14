@@ -1,0 +1,45 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-03-07 13:05:08.521473",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "opportunity_id",
+  "customer_name",
+  "add_comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "opportunity_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Opportunity Id",
+   "options": "Opportunity"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "add_comment",
+   "fieldtype": "Button",
+   "label": "Add Comment"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-03-09 13:29:02.673636",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Field Visit Opportunity",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

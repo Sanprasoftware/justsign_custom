@@ -1,0 +1,95 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-29 14:44:08.651157",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "price_list",
+  "column_break_gokh",
+  "item",
+  "column_break_ghmw",
+  "qty",
+  "column_break_icoa",
+  "currency",
+  "section_break_trxe",
+  "uom_price",
+  "stock_rows"
+ ],
+ "fields": [
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Price List",
+   "options": "Price List"
+  },
+  {
+   "fieldname": "column_break_gokh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "column_break_ghmw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "label": "Qty"
+  },
+  {
+   "fieldname": "column_break_icoa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "section_break_trxe",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "uom_price",
+   "fieldtype": "Table",
+   "label": "Uom Price",
+   "options": "Quick Price UOM Row"
+  },
+  {
+   "fieldname": "stock_rows",
+   "fieldtype": "Table",
+   "label": "Stock Rows",
+   "options": "Quick Price Lookup Stock Row"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-02-02 14:12:19.980194",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Quick Price Lookup",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-07 14:31:26.064334",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transporter",
+  "attach",
+  "click",
+  "column_break_dtla",
+  "section_break_gggf",
+  "items"
+ ],
+ "fields": [
+  {
+   "fieldname": "attach",
+   "fieldtype": "Attach",
+   "label": "Attach"
+  },
+  {
+   "fieldname": "column_break_dtla",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_gggf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "items",
+   "options": "Courier Bill Entry Child Table"
+  },
+  {
+   "fieldname": "click",
+   "fieldtype": "Button",
+   "label": "Click"
+  },
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "label": "Transporter",
+   "link_filters": "[[\"Supplier\",\"is_transporter\",\"=\",1]]",
+   "options": "Supplier"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-09 12:52:39.487676",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Courier Bill Entry",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

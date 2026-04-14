@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:{brand}-{model}",
+ "creation": "2025-02-03 21:49:29.629842",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_type",
+  "column_break_heik",
+  "brand",
+  "column_break_npof",
+  "model",
+  "column_break_qqag",
+  "category",
+  "selling_item_tab",
+  "items",
+  "section_break_cwdr",
+  "item_group",
+  "column_break_tcbf",
+  "qty"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "label": "Vehicle Type",
+   "options": "\nCar\nBike"
+  },
+  {
+   "fieldname": "column_break_heik",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Category"
+  },
+  {
+   "fieldname": "selling_item_tab",
+   "fieldtype": "Tab Break",
+   "label": "Selling Item"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Vehicle List Item"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand"
+  },
+  {
+   "fieldname": "column_break_npof",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qqag",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_cwdr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "column_break_tcbf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "label": "Qty"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-31 11:00:41.264700",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Vehicle List",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

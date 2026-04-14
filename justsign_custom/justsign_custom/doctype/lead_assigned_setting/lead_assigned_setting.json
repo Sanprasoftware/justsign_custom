@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{user_name}-{pincode}",
+ "creation": "2025-06-05 17:57:39.927494",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "user_name",
+  "pincode"
+ ],
+ "fields": [
+  {
+   "fieldname": "user_name",
+   "fieldtype": "Link",
+   "label": "User Name",
+   "options": "User"
+  },
+  {
+   "fieldname": "pincode",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Pincode",
+   "length": 6,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-05 17:59:48.505252",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Lead Assigned Setting",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

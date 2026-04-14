@@ -1,0 +1,266 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-17 10:11:20.188542",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "document_type",
+  "lead_type",
+  "territory",
+  "opportunity_type",
+  "campaign_name",
+  "add",
+  "column_break_oolq",
+  "form_date",
+  "brand",
+  "source",
+  "customer_group",
+  "opportunity_from",
+  "column_break_rxkb",
+  "to_date",
+  "status",
+  "default_price_list",
+  "opportunity_status",
+  "quotation_status",
+  "campaign_names",
+  "section_break_kuqc",
+  "name_this_campign",
+  "column_break_tmzl",
+  "campaign_description",
+  "column_break_ajil",
+  "select_caller",
+  "section_break_bzj9",
+  "lead",
+  "prospect",
+  "customer",
+  "quotation",
+  "opportunity",
+  "territorys"
+ ],
+ "fields": [
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Document Type",
+   "options": "\nLead\nProspect\nCustomer\nQuotation\nOpportunity",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Lead\"",
+   "fieldname": "lead_type",
+   "fieldtype": "Select",
+   "label": "Lead Type",
+   "options": "\nEnd User\nClient\nChannel Partner\nB2B"
+  },
+  {
+   "depends_on": "eval:doc.document_type != \"Quotation\" && doc.document_type != \"Opportunity\"",
+   "fieldname": "territory",
+   "fieldtype": "Table MultiSelect",
+   "label": "Territory",
+   "options": "Territory Filter Child Table"
+  },
+  {
+   "fieldname": "add",
+   "fieldtype": "Button",
+   "label": "Fetch Data"
+  },
+  {
+   "fieldname": "column_break_oolq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "form_date",
+   "fieldtype": "Date",
+   "label": "Form Date",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Lead\" || doc.document_type == \"Opportunity\"",
+   "fieldname": "brand",
+   "fieldtype": "Link",
+   "label": "Brand",
+   "options": "Brand"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Lead\"",
+   "fieldname": "source",
+   "fieldtype": "Link",
+   "label": "Source",
+   "options": "Lead Source"
+  },
+  {
+   "depends_on": "eval:doc.document_type != \"Quotation\" && doc.document_type != \"Opportunity\"",
+   "fieldname": "customer_group",
+   "fieldtype": "Table MultiSelect",
+   "label": "Customer Group",
+   "options": "Customer Group Child Table"
+  },
+  {
+   "fieldname": "column_break_rxkb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Lead\"",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nLead\nProspect\nOpen\nReplied\nOpportunity\nQuotation\nLost Quotation\nInterested\nConverted\nDo Not Contact\nOrdered"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Customer\"",
+   "fieldname": "default_price_list",
+   "fieldtype": "Link",
+   "label": "Default Price List",
+   "options": "Price List"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Lead\"",
+   "fieldname": "lead",
+   "fieldtype": "Table",
+   "label": "Lead",
+   "options": "Lead Child Table"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Prospect\"",
+   "fieldname": "prospect",
+   "fieldtype": "Table",
+   "label": "Prospect",
+   "options": "Prospect Child Table"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Customer\"",
+   "fieldname": "customer",
+   "fieldtype": "Table",
+   "label": "Customer",
+   "options": "Customer Child Table"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Quotation\"",
+   "fieldname": "quotation",
+   "fieldtype": "Table",
+   "label": "Quotation",
+   "options": "Quotation Child Table"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Opportunity\"",
+   "fieldname": "opportunity",
+   "fieldtype": "Table",
+   "label": "Opportunity",
+   "options": "Opportunity Child Table"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Opportunity\"",
+   "fieldname": "campaign_name",
+   "fieldtype": "Link",
+   "label": "Campaign Name",
+   "options": "Campaign"
+  },
+  {
+   "fieldname": "campaign_description",
+   "fieldtype": "Data",
+   "label": "Campaign Description"
+  },
+  {
+   "fieldname": "section_break_bzj9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "select_caller",
+   "fieldtype": "Link",
+   "label": "Select Caller",
+   "options": "User"
+  },
+  {
+   "depends_on": "eval:doc.document_type == \"Opportunity\"",
+   "fieldname": "opportunity_type",
+   "fieldtype": "Link",
+   "label": "Opportunity Type",
+   "options": "Opportunity Type"
+  },
+  {
+   "depends_on": "eval:doc.document_type == \"Opportunity\"",
+   "fieldname": "opportunity_from",
+   "fieldtype": "Link",
+   "label": "Opportunity From",
+   "link_filters": "[[\"DocType\",\"name\",\"in\",[\"Customer\",\"Lead\",\"Prospect\"]]]",
+   "options": "DocType"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Territory\"",
+   "fieldname": "territorys",
+   "fieldtype": "Table",
+   "label": "Territorys",
+   "options": "Territory Child Table"
+  },
+  {
+   "fieldname": "name_this_campign",
+   "fieldtype": "Data",
+   "label": "Name This Campign"
+  },
+  {
+   "fieldname": "section_break_kuqc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_tmzl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ajil",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Opportunity\"",
+   "fieldname": "opportunity_status",
+   "fieldtype": "Select",
+   "label": "Opportunity Status",
+   "options": "\nOpen\nQuotation\nConverted\nLost\nReplied\nClose"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Quotation\"",
+   "fieldname": "quotation_status",
+   "fieldtype": "Select",
+   "label": "Quotation Status",
+   "options": "\nDraft\nNot Saved\nOrdered\nCancelled"
+  },
+  {
+   "depends_on": "eval: doc.document_type == \"Lead\"",
+   "fieldname": "campaign_names",
+   "fieldtype": "Link",
+   "label": "Campaign Names",
+   "options": "Campaign"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-07-22 16:56:37.571042",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Lead Campaign",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

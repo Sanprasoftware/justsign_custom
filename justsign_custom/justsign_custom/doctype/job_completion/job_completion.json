@@ -1,0 +1,90 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-18 23:02:02.327760",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_knnd",
+  "amended_from",
+  "attach1",
+  "attach2",
+  "attach3",
+  "attach4",
+  "document_type",
+  "delivery_not_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_knnd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Job Completion",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "attach1",
+   "fieldtype": "Attach Image",
+   "label": "Attach1"
+  },
+  {
+   "fieldname": "attach2",
+   "fieldtype": "Attach Image",
+   "label": "Attach2"
+  },
+  {
+   "fieldname": "attach3",
+   "fieldtype": "Attach Image",
+   "label": "Attach3"
+  },
+  {
+   "fieldname": "attach4",
+   "fieldtype": "Attach",
+   "label": "Attach4"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "delivery_not_id",
+   "fieldtype": "Dynamic Link",
+   "label": "Document ID",
+   "options": "document_type"
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "label": "Document Type",
+   "options": "DocType"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-04-04 23:38:00.454603",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Job Completion",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

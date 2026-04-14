@@ -1,0 +1,219 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{vehicle_no}",
+ "creation": "2025-01-30 22:42:19.994365",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "vehicle_no",
+  "column_break_mtwr",
+  "document_type",
+  "column_break_xfaa",
+  "customer",
+  "column_break_dnyt",
+  "mobile_number",
+  "vehicle_details_section",
+  "column_break_jtbp",
+  "select_vehicle",
+  "column_break_vktt",
+  "vehicle_type",
+  "column_break_tysn",
+  "brand",
+  "column_break_jyzq",
+  "model",
+  "column_break_bosb",
+  "category",
+  "section_break_vogt",
+  "color",
+  "column_break_wjhm",
+  "purchase_year",
+  "column_break_pxwn",
+  "vin_number",
+  "insurance_details_section",
+  "insurance_company",
+  "policy_no",
+  "column_break_awvx",
+  "start_date",
+  "end_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "label": "Vehicle Type",
+   "options": "\nCar\nBike",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_vogt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "Model",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vin_number",
+   "fieldtype": "Data",
+   "label": "Vin Number"
+  },
+  {
+   "fieldname": "purchase_year",
+   "fieldtype": "Data",
+   "label": "Purchase Year"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Name",
+   "options": "document_type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xfaa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_wjhm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_jtbp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "vehicle_no",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "label": "Vehicle No"
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Data",
+   "label": "Color"
+  },
+  {
+   "fieldname": "select_vehicle",
+   "fieldtype": "Link",
+   "label": "Select Vehicle",
+   "options": "Vehicle List"
+  },
+  {
+   "fieldname": "vehicle_details_section",
+   "fieldtype": "Section Break",
+   "label": "Vehicle Details"
+  },
+  {
+   "fieldname": "column_break_tysn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "brand",
+   "fieldtype": "Data",
+   "label": "Brand",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jyzq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "insurance_details_section",
+   "fieldtype": "Section Break",
+   "label": "Insurance Details"
+  },
+  {
+   "fieldname": "insurance_company",
+   "fieldtype": "Data",
+   "label": "Insurance Company"
+  },
+  {
+   "fieldname": "policy_no",
+   "fieldtype": "Data",
+   "label": "Policy No"
+  },
+  {
+   "fieldname": "column_break_awvx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "document_type",
+   "fieldtype": "Link",
+   "label": "Document Type",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "column_break_vktt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_pxwn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_mtwr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dnyt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "label": "Mobile Number",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_bosb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "select_vehicle.category",
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Category"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-05-26 13:20:44.207709",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Customer Wise Vehicle",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
