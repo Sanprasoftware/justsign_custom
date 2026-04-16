@@ -2,6 +2,11 @@ import frappe
 import re
 from frappe.utils import now_datetime, add_to_date
 # import time
+
+
+def _get_child_rows(doc, fieldname):
+    value = getattr(doc, fieldname, None)
+    return value if isinstance(value, list) else []
   
 @frappe.whitelist()  
 def assign_sales_partner(doc,method): 
@@ -11,6 +16,18 @@ def assign_sales_partner(doc,method):
     # if not (doc.custom_pincode and doc.custom_brand and doc.type):
     #     return
  
+    required_fields = ("custom_pincode", "custom_brand", "custom_lead_type")
+    sales_partner_meta = frappe.get_meta("Sales Partner")
+    available_fields = {field.fieldname for field in sales_partner_meta.fields}
+
+    if not all(fieldname in available_fields for fieldname in required_fields):
+        frappe.logger().warning(
+            "Skipping sales partner auto-assignment for Lead %s because Sales Partner is missing fields: %s",
+            doc.name,
+            ", ".join(fieldname for fieldname in required_fields if fieldname not in available_fields),
+        )
+        return
+
     user_lists = frappe.get_all("Sales Partner", fields=["name"])
     matched_users = []
 
@@ -20,9 +37,13 @@ def assign_sales_partner(doc,method):
     # //check is exists or not
     #   frappe.db.exists("table name",{"parent":user.name,"pincodes":doc.custom_pincode})
           
-        has_matching_pincode = any(str(row.pincodes) == str(doc.custom_pincode) for row in user_doc.custom_pincode)
-        has_matching_brand = any(str(row.brand) == str(doc.custom_brand) for row in user_doc.custom_brand)
-        has_matching_type = any(str(row_lead.lead_type) == str(doc.type) for row_lead in user_doc.custom_lead_type)
+        pincode_rows = _get_child_rows(user_doc, "custom_pincode")
+        brand_rows = _get_child_rows(user_doc, "custom_brand")
+        lead_type_rows = _get_child_rows(user_doc, "custom_lead_type")
+
+        has_matching_pincode = any(str(row.pincodes) == str(doc.custom_pincode) for row in pincode_rows)
+        has_matching_brand = any(str(row.brand) == str(doc.custom_brand) for row in brand_rows)
+        has_matching_type = any(str(row_lead.lead_type) == str(doc.type) for row_lead in lead_type_rows)
   
         if has_matching_pincode and has_matching_brand and has_matching_type:
             matched_users.append(user.name)

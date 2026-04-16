@@ -94,10 +94,8 @@ after_migrate = ["justsign_custom.custom_pyfile.custom_python.patch_make_packing
 # 	"filters": "justsign_custom.utils.jinja_filters"
 # }
 jinja = {
-    "methods" : [
-      "justsign_custom.justsign_custom.utils.sales_order_print.get_invoice_item_and_tax_details",
-      "justsign_custom.justsign_custom.utils.sales_invoice_print.get_inv_item_and_tax_details",
-      "frappe.utils.data.money_in_words"
+    "methods": [
+        "frappe.utils.data.money_in_words",
     ]
 }
 
