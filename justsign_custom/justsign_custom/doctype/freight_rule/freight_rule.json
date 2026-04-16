@@ -1,0 +1,128 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:freight_rule_name",
+ "creation": "2026-01-21 16:23:09.726012",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "freight_rule_name",
+  "apply_on",
+  "column_break_hjcg",
+  "shipper",
+  "mode",
+  "calculate_based_on",
+  "section_break_ugxy",
+  "shipping_rule_item_wise",
+  "fright_role_qty_wise",
+  "fright_role_amount_wise",
+  "fright_role_weight_wise",
+  "fright_role_percentage_wise"
+ ],
+ "fields": [
+  {
+   "fieldname": "freight_rule_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Freight Rule Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "apply_on",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Apply On",
+   "options": "\nItem\nItem Group",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_hjcg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shipper",
+   "fieldtype": "Link",
+   "label": "Shipper",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "mode",
+   "fieldtype": "Select",
+   "label": "Mode",
+   "options": "\nAir\nRoad"
+  },
+  {
+   "fieldname": "calculate_based_on",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Calculate Based On",
+   "options": "\nQty Wise\nWeight Wise\nFix Price\nAmount Wise\nPercentage Wise"
+  },
+  {
+   "fieldname": "section_break_ugxy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "depends_on": "eval: doc.apply_on && doc.calculate_based_on == \"Fix Price\"",
+   "fieldname": "shipping_rule_item_wise",
+   "fieldtype": "Table",
+   "label": "Fright Role Fix Price",
+   "options": "Fright Role Fix Price"
+  },
+  {
+   "depends_on": "eval: doc.apply_on && doc.calculate_based_on == \"Qty Wise\"",
+   "fieldname": "fright_role_qty_wise",
+   "fieldtype": "Table",
+   "label": "Fright Role Qty Wise",
+   "options": "Fright Role Qty Wise Item"
+  },
+  {
+   "depends_on": "eval: doc.apply_on && doc.calculate_based_on == \"Amount Wise\"",
+   "fieldname": "fright_role_amount_wise",
+   "fieldtype": "Table",
+   "label": "Fright Role Amount Wise",
+   "options": "Fright Role Amount Wise"
+  },
+  {
+   "depends_on": "eval: doc.apply_on && doc.calculate_based_on == \"Weight Wise\"",
+   "fieldname": "fright_role_weight_wise",
+   "fieldtype": "Table",
+   "label": "Fright Role Weight Wise",
+   "options": "Fright Role Weight Wise"
+  },
+  {
+   "depends_on": "eval: doc.apply_on && doc.calculate_based_on == \"Percentage Wise\"",
+   "fieldname": "fright_role_percentage_wise",
+   "fieldtype": "Table",
+   "label": "Fright Role Percentage Wise",
+   "options": "Fright Role Percentage Wise"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-04-16 13:26:25.425394",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "Freight Rule",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
