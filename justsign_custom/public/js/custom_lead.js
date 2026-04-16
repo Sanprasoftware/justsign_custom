@@ -4,6 +4,7 @@ frappe.ui.form.on('Lead', {
         setTimeout(() => {
             cur_frm.page.remove_inner_button(__('Customer'),  __('Create'));
        }, 500);
+    //    Hii 
     },
     custom_vehicle_type: function(frm) {
         if (frm.doc.custom_vehicle_type === "Car") {
