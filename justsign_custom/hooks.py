@@ -32,6 +32,7 @@ app_license = "mit"
 # include js, css files in header of web template
 # web_include_css = "/assets/justsign_custom/css/justsign_custom.css"
 # web_include_js = "/assets/justsign_custom/js/justsign_custom.js"
+web_include_js = ["/assets/justsign_custom/js/custom_cart.js"]
 # app_include_css = "/assets/justsign_custom/css/custom_login.css"
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "justsign_custom/public/scss/website"
@@ -207,6 +208,9 @@ doc_events = {
     },
      "Event": {
         "before_insert": "justsign_custom.public.py.event.set_event_public"
+    },
+    "Sales Order": {
+        "validate": "justsign_custom.public.py.sales_order.apply_freight_rule"
     }
    
     # "Sales Order": {
@@ -267,6 +271,10 @@ scheduler_events = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "justsign_custom.event.get_events"
 # }
+override_whitelisted_methods = {
+    "webshop.webshop.shopping_cart.cart.update_cart": "justsign_custom.public.py.web_cart.update_cart",
+    "webshop.webshop.shopping_cart.cart.place_order": "justsign_custom.public.py.web_cart.place_order",
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,

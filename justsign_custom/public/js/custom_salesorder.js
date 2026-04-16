@@ -1,4 +1,10 @@
 frappe.ui.form.on('Sales Order', {
+    custom_shipper(frm) {
+        apply_freight_rule(frm);
+    },
+    custom_mode(frm) {
+        apply_freight_rule(frm);
+    },
     custom_vehicle_details: async function(frm) {
         if (frm.doc.custom_vehicle_details) {
             // Get the selected vehicle from 'Customer Wise Vehicle'
@@ -105,6 +111,8 @@ frappe.ui.form.on('Sales Order Item', {
         let row = locals[cdt][cdn]; // Get the child row
         if (!row.item_code) return;
 
+        setTimeout(() => apply_freight_rule(frm), 700);
+
         // Fetch the selected vehicle from "Customer Wise Vehicle"
         let veh_type_res = await frappe.db.get_value("Customer Wise Vehicle", { name: frm.doc.custom_vehicle_details }, "select_vehicle");
         if (!veh_type_res || !veh_type_res.message || !veh_type_res.message.select_vehicle) return;
@@ -157,7 +165,17 @@ frappe.ui.form.on('Sales Order Item', {
             }
         })
     },
+    qty(frm) {
+        apply_freight_rule(frm);
+    },
+    rate(frm) {
+        apply_freight_rule(frm);
+    },
+    amount(frm) {
+        apply_freight_rule(frm);
+    },
     items_remove(frm){
+        apply_freight_rule(frm);
         frm.call({
             method:"justsign_custom.custom_pyfile.custom_python.custom_bud_item",
             args:{
@@ -179,6 +197,45 @@ frappe.ui.form.on('Sales Order Item', {
         })
     }
 });
+
+function apply_freight_rule(frm) {
+    if (frm.doc.docstatus !== 0) {
+        return;
+    }
+
+    clearTimeout(frm.freight_rule_timeout);
+    frm.freight_rule_timeout = setTimeout(() => {
+        frappe.call({
+            method: "justsign_custom.public.py.sales_order.get_freight_rule_result",
+            args: {
+                doc: frm.doc
+            },
+            freeze: false,
+            callback: function(r) {
+                if (!r.message) {
+                    return;
+                }
+
+                frm.clear_table("taxes");
+                (r.message.taxes || []).forEach(tax => {
+                    let row = frm.add_child("taxes");
+                    Object.keys(tax).forEach(fieldname => {
+                        if (!["doctype", "name", "parent", "parentfield", "parenttype", "idx"].includes(fieldname)) {
+                            row[fieldname] = tax[fieldname];
+                        }
+                    });
+                });
+
+                if (frm.fields_dict.custom_freight_amount) {
+                    frm.set_value("custom_freight_amount", r.message.freight_amount || 0);
+                }
+
+                frm.refresh_field("taxes");
+                frm.script_manager.trigger("calculate_taxes_and_totals");
+            }
+        });
+    }, 300);
+}
 
 frappe.ui.form.on('Custom Bundle Item', {
     item_code(frm, cdt, cdn) {
@@ -212,4 +269,3 @@ function set_custom_bundle_batch_query(frm, cdt, cdn) {
         };
     };
 }
-
