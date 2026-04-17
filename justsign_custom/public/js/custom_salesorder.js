@@ -208,7 +208,8 @@ function apply_freight_rule(frm) {
         frappe.call({
             method: "justsign_custom.public.py.sales_order.get_freight_rule_result",
             args: {
-                doc: frm.doc
+                doc: frm.doc,
+                previous_auto_freight_amount: frm._auto_freight_amount || frm.doc.custom_freight_amount || 0
             },
             freeze: false,
             callback: function(r) {
@@ -229,6 +230,7 @@ function apply_freight_rule(frm) {
                 if (frm.fields_dict.custom_freight_amount) {
                     frm.set_value("custom_freight_amount", r.message.freight_amount || 0);
                 }
+                frm._auto_freight_amount = flt(r.message.freight_amount || 0);
 
                 frm.refresh_field("taxes");
                 frm.script_manager.trigger("calculate_taxes_and_totals");

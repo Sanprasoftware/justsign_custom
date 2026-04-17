@@ -92,25 +92,38 @@ def create_and_attach_pdf(doc, method):
 
     
 
-def apply_freight_rule(doc, method=None):
+def apply_freight_rule(doc, method=None, previous_auto_freight_amount=None):
     """Apply custom Freight Rule amount on Sales Order taxes."""
     freight_amount = calculate_freight_amount(doc)
-
-    if doc.meta.has_field("custom_freight_amount"):
-        doc.custom_freight_amount = freight_amount
-
     freight_tax_row = get_existing_freight_tax_row(doc)
+    has_custom_freight_amount = doc.meta.has_field("custom_freight_amount")
+    if previous_auto_freight_amount is None:
+        previous_auto_freight_amount = doc.get("custom_freight_amount") if has_custom_freight_amount else 0
+    previous_auto_freight_amount = flt(previous_auto_freight_amount)
 
-    if not freight_amount:
-        if freight_tax_row:
-            freight_tax_row.tax_amount = 0
+    manual_freight_amount = 0
+    if freight_tax_row:
+        # Keep the user's manual amount as the base, and only replace the auto rule part.
+        manual_freight_amount = flt(freight_tax_row.tax_amount) - previous_auto_freight_amount
+
+    total_freight_amount = flt(
+        manual_freight_amount + freight_amount,
+        doc.precision("total_taxes_and_charges") or 2,
+    )
+
+    if not total_freight_amount and not freight_tax_row:
+        if has_custom_freight_amount:
+            doc.custom_freight_amount = freight_amount
         return
+
+    if has_custom_freight_amount:
+        doc.custom_freight_amount = freight_amount
 
     if freight_tax_row:
         freight_tax_row.charge_type = "Actual"
         freight_tax_row.account_head = FREIGHT_ACCOUNT_HEAD
         freight_tax_row.description = freight_tax_row.description or FREIGHT_CHARGE_DESCRIPTION
-        freight_tax_row.tax_amount = freight_amount
+        freight_tax_row.tax_amount = total_freight_amount
         return
 
     doc.append(
@@ -119,18 +132,19 @@ def apply_freight_rule(doc, method=None):
             "charge_type": "Actual",
             "account_head": FREIGHT_ACCOUNT_HEAD,
             "description": FREIGHT_CHARGE_DESCRIPTION,
-            "tax_amount": freight_amount,
+            "tax_amount": total_freight_amount,
         },
     )
 
 
 @frappe.whitelist()
-def get_freight_rule_result(doc):
+def get_freight_rule_result(doc, previous_auto_freight_amount=None):
     doc = frappe.get_doc(frappe.parse_json(doc))
-    apply_freight_rule(doc)
+    apply_freight_rule(doc, previous_auto_freight_amount=previous_auto_freight_amount)
+    auto_freight_amount = calculate_freight_amount(doc)
 
     return {
-        "freight_amount": doc.get("custom_freight_amount") or calculate_freight_amount(doc),
+        "freight_amount": auto_freight_amount,
         "taxes": [tax.as_dict() for tax in doc.get("taxes", [])],
     }
 
@@ -346,4 +360,3 @@ def get_existing_freight_tax_row(doc):
             return tax
 
     return None
-cd
