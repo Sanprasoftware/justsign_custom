@@ -90,7 +90,6 @@ def create_and_attach_pdf(doc, method):
     public_url = get_url(filedoc.file_url)
     frappe.msgprint(f"PDF Generated: <a href='{public_url}' target='_blank'>{public_url}</a>")
 
-    
 
 def apply_freight_rule(doc, method=None, previous_auto_freight_amount=None):
     """Apply custom Freight Rule amount on Sales Order taxes."""

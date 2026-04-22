@@ -13,10 +13,10 @@ def assign_sales_partner(doc,method):
      
     # time.sleep(10)
 
-    # if not (doc.custom_pincode and doc.custom_brand and doc.type):
+    # if not (doc.pincode and doc.custom_brand and doc.type):
     #     return
  
-    required_fields = ("custom_pincode", "custom_brand", "custom_lead_type")
+    required_fields = ("pincode", "custom_brand", "custom_lead_type")
     sales_partner_meta = frappe.get_meta("Sales Partner")
     available_fields = {field.fieldname for field in sales_partner_meta.fields}
 
@@ -35,13 +35,13 @@ def assign_sales_partner(doc,method):
         user_doc = frappe.get_doc("Sales Partner", user.name)
 
     # //check is exists or not
-    #   frappe.db.exists("table name",{"parent":user.name,"pincodes":doc.custom_pincode})
+    #   frappe.db.exists("table name",{"parent":user.name,"pincodes":doc.pincode})
           
-        pincode_rows = _get_child_rows(user_doc, "custom_pincode")
+        pincode_rows = _get_child_rows(user_doc, "pincode")
         brand_rows = _get_child_rows(user_doc, "custom_brand")
         lead_type_rows = _get_child_rows(user_doc, "custom_lead_type")
 
-        has_matching_pincode = any(str(row.pincodes) == str(doc.custom_pincode) for row in pincode_rows)
+        has_matching_pincode = any(str(row.pincodes) == str(doc.pincode) for row in pincode_rows)
         has_matching_brand = any(str(row.brand) == str(doc.custom_brand) for row in brand_rows)
         has_matching_type = any(str(row_lead.lead_type) == str(doc.type) for row_lead in lead_type_rows)
   
@@ -49,7 +49,7 @@ def assign_sales_partner(doc,method):
             matched_users.append(user.name)
 
     if not matched_users:
-        frappe.msgprint(f"No matching Sales Partner found for:\nPincode: {doc.custom_pincode}, Brand: {doc.custom_brand}, Lead Type: {doc.type}")
+        frappe.msgprint(f"No matching Sales Partner found for:\nPincode: {doc.pincode}, Brand: {doc.custom_brand}, Lead Type: {doc.type}")
         # doc.custom_lead_status = "Not Assigned" 
         frappe.db.set_value("Lead", doc.name, "custom_lead_status", "Not Assigned")
         
@@ -95,7 +95,7 @@ def assign_sales_partner(doc,method):
                 "lead_name": doc.first_name,
                 "lead_email": doc.email_id,
                 "lead_city": doc.city,
-                "lead_pincode": doc.custom_pincode,
+                "lead_pincode": doc.pincode,
                 "lead_status": doc.status,
                 "lead_brand": doc.custom_brand,
                 "sales_partner_mobile_number" : customer.custom_mobile_no,
@@ -126,7 +126,7 @@ def assign_sales_partner(doc,method):
             new_doc.lead_name = doc.first_name
             new_doc.lead_email = doc.email_id
             new_doc.lead_city = doc.city
-            new_doc.lead_pincode = doc.custom_pincode
+            new_doc.lead_pincode = doc.pincode
             new_doc.lead_status = doc.status
             new_doc.lead_brand = doc.custom_brand
             new_doc.sales_partner_mobile_number = customer.custom_mobile_no
@@ -143,7 +143,7 @@ def assign_sales_partner(doc,method):
             #     "lead_name": doc.first_name,
             #     "lead_email": doc.email_id,
             #     "lead_city": doc.city,
-            #     "lead_pincode": doc.custom_pincode,
+            #     "lead_pincode": doc.pincode,
             #     "lead_status": doc.status,
             #     "lead_brand": doc.custom_brand,
             #     "sales_partner_mobile_number": customer.custom_mobile_no,
