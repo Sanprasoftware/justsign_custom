@@ -209,9 +209,9 @@ doc_events = {
      "Event": {
         "before_insert": "justsign_custom.public.py.event.set_event_public"
     },
-    "Sales Order": {
-        "validate": "justsign_custom.public.py.sales_order.apply_freight_rule"
-    }
+    # "Sales Order": {
+    #     "validate": "justsign_custom.public.py.sales_order.apply_freight_rule"
+    # }
    
     # "Sales Order": {
     #       "on_submit": "justsign_custom.public.py.sales_order.create_and_attach_pdf"
