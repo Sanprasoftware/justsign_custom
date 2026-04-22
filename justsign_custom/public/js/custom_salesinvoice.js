@@ -101,7 +101,7 @@ frappe.ui.form.on('Sales Invoice', {
 
 frappe.ui.form.on('Sales Invoice Item', {
     async item_code(frm, cdt, cdn) {
-        let row = locals[cdt][cdn];
+        let row = locals[cdt][cdn]; 
         if (row.item_code) {
             // Fetch package amount from "Packages"
             let pkg_type_res = await frappe.db.get_value("Packages", { name: row.item_code }, "package_amount");
