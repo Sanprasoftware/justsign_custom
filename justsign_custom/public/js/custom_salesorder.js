@@ -108,6 +108,7 @@ frappe.ui.form.on('Sales Order', {
 
 frappe.ui.form.on('Sales Order Item', {
     item_code: async function (frm, cdt, cdn) {
+        // frappe.throw("Jii")
         let row = locals[cdt][cdn]; // Get the child row
         if (!row.item_code) return;
 
