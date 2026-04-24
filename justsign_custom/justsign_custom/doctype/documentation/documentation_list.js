@@ -1,7 +1,7 @@
 
 frappe.ui.form.on('Documentation', {
     refresh(frm) {
-        frappe.throw("Hii")
+        // frappe.throw("Hii")
         if (!window.doc_password_verified) {
             show_password_popup();
         }
