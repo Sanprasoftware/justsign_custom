@@ -151,9 +151,9 @@ jinja = {
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"Payment Entry": "justsign_custom.overrides.payment_entry.CustomPaymentEntry"
-# }
+override_doctype_class = {
+	"Serial and Batch Bundle": "justsign_custom.overrides.serial_and_batch_bundle.CustomSerialandBatchBundle"
+}
 # Document Events
 # ---------------
 # Hook on document methods and events
