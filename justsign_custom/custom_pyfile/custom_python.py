@@ -117,6 +117,7 @@ def on_trash(self, action):
 
 @frappe.whitelist()
 def cust_set_status(self, action):
+    # self.flags.ignore_mandatory = True
     if self.prospect_name:
         prospect_cust = frappe.get_doc("Prospect", self.prospect_name)
         if not self.mobile_no:
