@@ -1,4 +1,166 @@
 frappe.ui.form.on('Sales Order', {
+
+// scan_barcode: async function(frm) {
+
+// 	if (!frm.doc.scan_barcode) return;
+
+// 	let barcode = frm.doc.scan_barcode;
+
+// 	// FORMAT:
+// 	// ITEM001,2,500
+
+// 	let data = barcode.split(",");
+
+// 	if (data.length < 3) {
+// 		frappe.msgprint(__("Invalid Barcode"));
+// 		frm.set_value("scan_barcode", "");
+// 		return;
+// 	}
+
+// 	let item_code = data[0].trim();
+// 	let qty = flt(data[1]);
+// 	let rate = flt(data[2]);
+
+// 	// CHECK ITEM EXISTS
+// 	let item = await frappe.db.get_value(
+// 		"Item",
+// 		{ item_code: item_code },
+// 		"name"
+// 	);
+
+// 	if (!item.message) {
+// 		frappe.msgprint(__("Item not found"));
+// 		frm.set_value("scan_barcode", "");
+// 		return;
+// 	}
+
+// 	let row = null;
+
+// 	// USE FIRST ROW IF BLANK
+// 	if (
+// 		frm.doc.items &&
+// 		frm.doc.items.length > 0 &&
+// 		!frm.doc.items[0].item_code
+// 	) {
+// 		row = frm.doc.items[0];
+// 	}
+// 	else {
+// 		row = frm.add_child("items");
+// 	}
+
+// 	// SET ITEM CODE FIRST
+// 	await frappe.model.set_value(
+// 		row.doctype,
+// 		row.name,
+// 		"item_code",
+// 		item_code
+// 	);
+
+// 	// DIRECTLY SET VALUES
+// 	row.qty = qty;
+// 	row.rate = rate;
+// 	row.price_list_rate = rate;
+// 	row.amount = qty * rate;
+
+// 	frm.refresh_field("items");
+
+// 	// CLEAR BARCODE
+// 	frm.set_value("scan_barcode", "");
+// },
+
+
+scan_barcode: async function(frm) {
+
+	if (!frm.doc.scan_barcode) return;
+
+	let barcode = frm.doc.scan_barcode;
+
+	// FORMAT:
+	// ITEM001,2,500
+
+	let data = barcode.split(",");
+
+	if (data.length < 3) {
+		frappe.msgprint(__("Invalid Barcode"));
+		frm.set_value("scan_barcode", "");
+		return;
+	}
+
+	let item_code = data[0].trim();
+	let qty = flt(data[1]);
+	let rate = flt(data[2]);
+
+	// CHECK ITEM EXISTS
+	let item = await frappe.db.get_value(
+		"Item",
+		{ item_code: item_code },
+		"name"
+	);
+
+	if (!item.message) {
+		frappe.msgprint(__("Item not found"));
+		frm.set_value("scan_barcode", "");
+		return;
+	}
+
+	let existing_row = null;
+
+	// CHECK SAME ITEM ALREADY EXISTS
+	(frm.doc.items || []).forEach(d => {
+		if (d.item_code == item_code) {
+			existing_row = d;
+		}
+	});
+
+	// IF ITEM EXISTS THEN UPDATE QTY
+	if (existing_row) {
+
+		existing_row.qty = flt(existing_row.qty) + qty;
+		existing_row.rate = rate;
+		existing_row.price_list_rate = rate;
+		existing_row.amount = existing_row.qty * rate;
+
+		frm.refresh_field("items");
+		frm.set_value("scan_barcode", "");
+		return;
+	}
+
+	let row = null;
+
+	// USE FIRST ROW IF BLANK
+	if (
+		frm.doc.items &&
+		frm.doc.items.length > 0 &&
+		!frm.doc.items[0].item_code
+	) {
+		row = frm.doc.items[0];
+	}
+	else {
+		row = frm.add_child("items");
+	}
+
+	// SET ITEM CODE FIRST
+	await frappe.model.set_value(
+		row.doctype,
+		row.name,
+		"item_code",
+		item_code
+	);
+
+	// SET VALUES
+	row.qty = qty;
+	row.rate = rate;
+	row.price_list_rate = rate;
+	row.amount = qty * rate;
+
+	frm.refresh_field("items");
+
+	// CLEAR BARCODE
+	frm.set_value("scan_barcode", "");
+},
+
+
+
     custom_shipper(frm) {
         apply_freight_rule(frm);
     },
