@@ -265,6 +265,13 @@ scan_barcode: async function(frm) {
         }
     
     },
+    onload(frm) {
+        if (frm.is_new()) {
+            setTimeout(() => {
+                frm.set_value("transaction_date", null);
+            }, 200);
+        }
+    }
 });
 
 

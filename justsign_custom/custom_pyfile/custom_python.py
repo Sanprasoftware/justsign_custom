@@ -115,9 +115,31 @@ def on_trash(self, action):
     for i in self.leads:
         frappe.set_value("Lead",i.lead, "status", "Lead")
 
+def normalize_customer_email_id(self, action=None):
+    email_id = self.get("email_id")
+
+    if isinstance(email_id, str):
+        email_id = email_id.strip()
+
+    self.email_id = email_id or None
+
+def normalize_customer_mobile_no(self, action=None):
+    mobile_no = self.get("mobile_no")
+
+    if isinstance(mobile_no, str):
+        mobile_no = mobile_no.strip()
+
+    self.mobile_no = mobile_no or None
+
+def normalize_customer_contact_fields(self, action=None):
+    normalize_customer_email_id(self)
+    normalize_customer_mobile_no(self)
+
 @frappe.whitelist()
 def cust_set_status(self, action):
     # self.flags.ignore_mandatory = True
+    normalize_customer_contact_fields(self)
+
     if self.prospect_name:
         prospect_cust = frappe.get_doc("Prospect", self.prospect_name)
         if not self.mobile_no:
@@ -129,6 +151,7 @@ def cust_set_status(self, action):
                     if mobile_no:
                         self.mobile_no = mobile_no
                         break
+        normalize_customer_mobile_no(self)
         for lead_row in prospect_cust.leads:
             frappe.set_value("Lead",lead_row.lead, "status", "Converted")
 @frappe.whitelist()

@@ -52,11 +52,16 @@ doctype_js = {"Lead":"public/js/custom_lead.js",
                 "Sales Order":"public/js/custom_salesorder.js",
                 "Sales Invoice":"public/js/custom_salesinvoice.js",
                 "Quotation":"public/js/custom_quotation.js",
+                "Purchase Order":"public/js/purchase_order.js",
                 "Purchase Receipt":"public/js/custom_purchase_receipt.js",
+                "Purchase Invoice":"public/js/purchase_invoice.js",
                 "Job Card":"public/js/custom_jobcard.js",
-                "Delivery Note":"public/js/delivery_note.js",
+                "Delivery Note":"public/js/custom_delivery.js",
                 # "Sales Order":"public/js/sales_order.js",
                 # "Prospect": "public/js/prospect.js",
+                "Item": "public/js/item.js",
+                "Journal Entry": "public/js/journal_entry.js",
+                "Payment Entry": "public/js/payment_entry.js"
             }
 after_migrate = ["justsign_custom.custom_pyfile.custom_python.patch_make_packing_list"]
 
@@ -163,6 +168,9 @@ doc_events = {
         "on_trash": "justsign_custom.custom_pyfile.custom_python.on_trash"
     },
      "Customer": { 
+        "before_validate": "justsign_custom.custom_pyfile.custom_python.normalize_customer_contact_fields",
+        "before_insert": "justsign_custom.custom_pyfile.custom_python.normalize_customer_contact_fields",
+        "validate": "justsign_custom.custom_pyfile.custom_python.normalize_customer_contact_fields",
         "before_save": "justsign_custom.custom_pyfile.custom_python.cust_set_status",
         "on_trash": "justsign_custom.custom_pyfile.custom_python.cust_del_set_status"
     },
@@ -173,9 +181,11 @@ doc_events = {
     #     ]
     # },
     "Sales Invoice": {
+        "before_save": "justsign_custom.public.py.sales_invoice.validate_is_return",
         "on_submit":[
             "justsign_custom.public.py.sales_invoice.create_and_attach_pdf",
             "justsign_custom.public.py.sales_invoice.send_invoice_email",
+            
         ],
         "on_update_after_submit": "justsign_custom.public.py.sales_invoice.create_and_attach_pdf",
     },
@@ -218,6 +228,13 @@ doc_events = {
     #       "on_submit": "justsign_custom.public.py.sales_order.create_and_attach_pdf"
     #   #   "on_submit": "justsign_custom.public.py.sales_order.create_job_cards",
     # },
+    "Item": {
+        "before_save": "justsign_custom.public.py.item.set_income_expense_accout_mandetory"
+    },
+    "Salary Slip": {
+        "validate": "justsign_custom.public.py.salary_slip.add_deduction"
+    }
+  
 }
 # doc_events = {
 # 	"*": {
@@ -275,6 +292,8 @@ scheduler_events = {
 override_whitelisted_methods = {
     "webshop.webshop.shopping_cart.cart.update_cart": "justsign_custom.public.py.web_cart.update_cart",
     "webshop.webshop.shopping_cart.cart.place_order": "justsign_custom.public.py.web_cart.place_order",
+    "frappe.desk.query_report.run": "justsign_custom.public.py.stock_balance_limited_columns.run",
+    "frappe.desk.query_report.export_query": "justsign_custom.public.py.stock_balance_limited_columns.export_query",
 }
 #
 # each overriding function accepts a `data` argument;

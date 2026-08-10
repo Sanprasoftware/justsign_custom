@@ -1,4 +1,14 @@
 frappe.ui.form.on('Delivery Note', {
+     onload_post_render: async function(frm) {
+        if (frm.is_new() && !frm.__posting_date_cleared) {
+            frm.__posting_date_cleared = true;
+            frm.set_df_property('posting_date', 'hidden', 0);
+            await frm.set_value('set_posting_time', 1);
+            await frm.set_value('posting_date', '');
+            frm.set_df_property('posting_date', 'read_only', 0);
+            frm.refresh_field('posting_date');
+        }
+    },
     refresh: function (frm) {
         if (frm.doc.customer) {
             frm.set_query('custom_select_package', function() {
@@ -107,7 +117,6 @@ frappe.ui.form.on('Delivery Note', {
         //     }
     },
     on_submit: function(frm) {
-        console.log("qqqqqqqqqqqqqq")
         // if (!frm.doc.custom_job_completion_id) {
         //     frappe.throw(__('Please Add Job Completion before submitting.'));
         // }
@@ -262,3 +271,13 @@ frappe.ui.form.on('Delivery Note', {
         }
     }
 });
+
+frappe.ui.form.on('Custom Bundle Item', {
+    item_code(frm, cdt, cdn) {
+      frm.fields_dict.custom_items_bundle.grid.get_field('batch').get_query =
+  function(doc, cdt, cdn) {
+        const row = locals[cdt][cdn];
+        return { filters: { item: row.item_code } };
+      };
+    }
+  });
