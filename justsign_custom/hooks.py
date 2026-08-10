@@ -285,7 +285,7 @@ scheduler_events = {
 
 # Overriding Methods
 # ------------------------------
-#
+# 
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "justsign_custom.event.get_events"
 # }
