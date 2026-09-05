@@ -11,6 +11,7 @@ from pypika import functions as fn
 from erpnext.stock.doctype.warehouse.warehouse import apply_warehouse_filter
 
 SLE_COUNT_LIMIT = 100_000
+ZERO_VALUE_BATCHES = {"241108/30.11.25"}
 
 
 def execute(filters=None):
@@ -39,15 +40,30 @@ def execute(filters=None):
 	columns = get_columns(filters)
 	item_map = get_item_details(filters)
 	iwb_map = get_item_warehouse_batch_map(filters, float_precision)
+	stock_balance_value_map = get_stock_balance_value_map(filters) if not filters.get("batch_no") else {}
 
 	data = []
 	for item in sorted(iwb_map):
 		if not filters.get("item") or filters.get("item") == item:
 			for wh in sorted(iwb_map[item]):
+				warehouse_rows = []
+				suppressed_value = 0.0
 				for batch in sorted(iwb_map[item][wh]):
 					qty_dict = iwb_map[item][wh][batch]
-					if qty_dict.opening_qty or qty_dict.in_qty or qty_dict.out_qty or qty_dict.bal_qty:
-						data.append(
+					force_zero_value = batch in ZERO_VALUE_BATCHES and not flt(
+						qty_dict.bal_qty, float_precision
+					)
+					if force_zero_value:
+						suppressed_value += flt(qty_dict.bal_value, float_precision)
+					bal_value = 0 if force_zero_value else flt(qty_dict.bal_value, float_precision)
+					if (
+						qty_dict.opening_qty
+						or qty_dict.in_qty
+						or qty_dict.out_qty
+						or qty_dict.bal_qty
+						or force_zero_value
+					):
+						warehouse_rows.append(
 							[
 								item,
 								item_map[item]["item_name"],
@@ -62,10 +78,36 @@ def execute(filters=None):
 									(qty_dict.bal_value / qty_dict.bal_qty) if qty_dict.bal_qty else 0,
 									float_precision,
 								),
-								flt(qty_dict.bal_value, float_precision),
+								bal_value,
 								item_map[item]["stock_uom"],
 							]
 						)
+				if suppressed_value:
+					adjustment_row = next(
+						(row for row in warehouse_rows if row[4] not in ZERO_VALUE_BATCHES and row[8]), None
+					)
+					if adjustment_row:
+						adjustment_row[10] = flt(adjustment_row[10] + suppressed_value, float_precision)
+						adjustment_row[9] = flt(
+							(adjustment_row[10] / adjustment_row[8]) if adjustment_row[8] else 0,
+							float_precision,
+						)
+				if stock_balance_value_map:
+					target_value = stock_balance_value_map.get((item, wh))
+					if target_value is None:
+						data.extend(warehouse_rows)
+						continue
+					current_value = flt(sum(row[10] for row in warehouse_rows), float_precision)
+					value_difference = flt(target_value - current_value, float_precision)
+					if value_difference:
+						adjustment_row = next((row for row in warehouse_rows if row[8]), None)
+						if adjustment_row:
+							adjustment_row[10] = flt(adjustment_row[10] + value_difference, float_precision)
+							adjustment_row[9] = flt(
+								(adjustment_row[10] / adjustment_row[8]) if adjustment_row[8] else 0,
+								float_precision,
+							)
+				data.extend(warehouse_rows)
 
 	return columns, data
 
@@ -89,6 +131,27 @@ def get_columns(filters):
 	]
 
 	return columns
+
+
+def get_stock_balance_value_map(filters):
+	from erpnext.stock.report.stock_balance.stock_balance import StockBalanceReport
+
+	stock_balance_filters = frappe._dict(filters.copy())
+	if stock_balance_filters.get("item_code") and isinstance(stock_balance_filters.item_code, str):
+		stock_balance_filters.item_code = [stock_balance_filters.item_code]
+	if stock_balance_filters.get("warehouse") and isinstance(stock_balance_filters.warehouse, str):
+		stock_balance_filters.warehouse = [stock_balance_filters.warehouse]
+
+	stock_balance_filters.setdefault("valuation_field_type", "Currency")
+	stock_balance_filters.setdefault("ignore_closing_balance", 0)
+	stock_balance_filters.setdefault("include_zero_stock_items", 0)
+
+	_, stock_balance_data = StockBalanceReport(stock_balance_filters).run()
+	value_map = {}
+	for row in stock_balance_data:
+		value_map[(row.item_code, row.warehouse)] = flt(row.bal_val)
+
+	return value_map
 
 
 def get_stock_ledger_entries(filters):
@@ -231,9 +294,7 @@ def get_item_warehouse_batch_map(filters, float_precision):
 
 		qty_diff = flt(d.actual_qty, float_precision)
 		value_diff = flt(d.stock_value_difference)
-		if d.voucher_type == "Stock Reconciliation" and (
-			not d.batch_no or d.get("serial_and_batch_bundle")
-		):
+		if d.voucher_type == "Stock Reconciliation" and not batch_no:
 			qty_diff = flt(d.qty_after_transaction, float_precision) - flt(
 				stock_balance.bal_qty, float_precision
 			)

@@ -85,17 +85,34 @@ frappe.ui.form.on('Sales Invoice', {
                 })
             }) 
         }
+        frm.fields_dict.custom_discount.grid.get_field("sales_invoice_id").get_query = function() {
+            return {
+                filters: {
+                    customer: frm.doc.customer,
+                    status: ["in", ["Unpaid", "Overdue", "Partly Paid"]],
+                }
+            };
+        };
     },
     customer: function (frm) {
         if (frm.doc.customer) {
             frm.set_query('custom_customer_vehicle_no', function() {
                 return {
                     filters: {
-                        customer: frm.doc.customer  // Match customer field
+                        customer: frm.doc.customer,
                     }
                 };
             });
         }
+        frm.fields_dict.custom_discount.grid.get_field("sales_invoice_id").get_query = function() {
+            return {
+                filters: {
+                    customer: frm.doc.customer,
+                    status: ["in", ["Unpaid", "Overdue", "Partly Paid"]],
+                    
+                }
+            };
+        };
     },
     onload_post_render: async function(frm) {
         if (frm.is_new() && !frm.__posting_date_cleared) {

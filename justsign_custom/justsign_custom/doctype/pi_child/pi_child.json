@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-12 18:07:44.562332",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "purchase_invoice_id",
+  "column_break_hkpy",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "column_break_hkpy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Amount",
+   "precision": "2"
+  },
+  {
+   "fieldname": "purchase_invoice_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Purchase Invoice Id",
+   "options": "Purchase Invoice"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-08-12 18:24:59.784628",
+ "modified_by": "Administrator",
+ "module": "Justsign Custom",
+ "name": "PI Child",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

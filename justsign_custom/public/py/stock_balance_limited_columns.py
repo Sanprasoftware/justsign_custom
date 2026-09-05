@@ -80,7 +80,19 @@ def apply_stock_balance_column_limit(report_name, result, user=None):
 
 def user_has_limited_stock_balance_role(user=None):
 	user = user or frappe.session.user
-	return LIMITED_STOCK_BALANCE_ROLE in frappe.get_roles(user)
+	if not user or user == "Guest":
+		return False
+
+	return bool(
+		frappe.db.exists(
+			"Has Role",
+			{
+				"parenttype": "User",
+				"parent": user,
+				"role": LIMITED_STOCK_BALANCE_ROLE,
+			},
+		)
+	)
 
 
 def limit_row_columns(row):

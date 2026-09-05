@@ -76,6 +76,3 @@ frappe.ui.form.on("Job Cards", {
     //     }
     // }
 });
-
-
-

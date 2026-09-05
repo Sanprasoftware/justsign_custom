@@ -144,21 +144,32 @@ jinja = {
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
+permission_query_conditions = {
+	"Sales Order": "justsign_custom.permissions.get_sales_order_permission_query_conditions",
+	"Job Cards": "justsign_custom.permissions.get_job_cards_permission_query_conditions",
+}
+
+has_permission = {
+	"Sales Order": "justsign_custom.permissions.has_sales_order_permission",
+	"Job Cards": "justsign_custom.permissions.has_job_cards_permission",
+}
 
 # DocType Class
 # ---------------
 # Override standard doctype classes
 
 override_doctype_class = {
-	"Serial and Batch Bundle": "justsign_custom.overrides.serial_and_batch_bundle.CustomSerialandBatchBundle"
+	"Serial and Batch Bundle": "justsign_custom.overrides.serial_and_batch_bundle.CustomSerialandBatchBundle",
+	"Salary Slip": "justsign_custom.overrides.salary_slip.CustomSalarySlip",
+	"Payroll Entry": "justsign_custom.overrides.payroll_entry.CustomPayrollEntry",
 }
+
+override_doctype_dashboards = {
+    "Sales Invoice": "justsign_custom.public.py.sales_invoice.get_dashboard_data",
+    "Purchase Invoice": "justsign_custom.public.py.purchase_invoice.get_dashboard_data",
+    "Payroll Entry": "justsign_custom.public.py.payroll_entry.get_dashboard_data",
+}
+
 # Document Events
 # ---------------
 # Hook on document methods and events
@@ -181,13 +192,24 @@ doc_events = {
     #     ]
     # },
     "Sales Invoice": {
-        "before_save": "justsign_custom.public.py.sales_invoice.validate_is_return",
+        "before_save": [
+            "justsign_custom.public.py.sales_invoice.validate_is_return",
+            "justsign_custom.public.py.sales_invoice.validate_custom_discount",
+        ],
         "on_submit":[
+            "justsign_custom.public.py.sales_invoice.create_discount_reconciliation_journal_entries",
             "justsign_custom.public.py.sales_invoice.create_and_attach_pdf",
             "justsign_custom.public.py.sales_invoice.send_invoice_email",
-            
         ],
         "on_update_after_submit": "justsign_custom.public.py.sales_invoice.create_and_attach_pdf",
+    },
+    "Purchase Invoice": {
+        "before_save": [
+            "justsign_custom.public.py.purchase_invoice.validate_is_return",
+            "justsign_custom.public.py.purchase_invoice.validate_custom_discount",
+            "justsign_custom.public.py.purchase_invoice.apply_freight_tds",
+        ],
+        "on_submit": "justsign_custom.public.py.purchase_invoice.create_discount_reconciliation_journal_entries",
     },
     "Quotation": {
         "on_submit":[
@@ -231,10 +253,6 @@ doc_events = {
     "Item": {
         "before_save": "justsign_custom.public.py.item.set_income_expense_accout_mandetory"
     },
-    "Salary Slip": {
-        "validate": "justsign_custom.public.py.salary_slip.add_deduction"
-    }
-  
 }
 # doc_events = {
 # 	"*": {
@@ -294,6 +312,7 @@ override_whitelisted_methods = {
     "webshop.webshop.shopping_cart.cart.place_order": "justsign_custom.public.py.web_cart.place_order",
     "frappe.desk.query_report.run": "justsign_custom.public.py.stock_balance_limited_columns.run",
     "frappe.desk.query_report.export_query": "justsign_custom.public.py.stock_balance_limited_columns.export_query",
+    "hrms.payroll.doctype.payroll_entry.payroll_entry.get_payroll_entries_for_jv": "justsign_custom.overrides.payroll_entry.get_payroll_entries_for_jv",
 }
 #
 # each overriding function accepts a `data` argument;

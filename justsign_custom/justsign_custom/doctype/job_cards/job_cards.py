@@ -6,8 +6,10 @@ from frappe.model.document import Document
 
 
 class JobCards(Document):
-	
 	def on_update(self):
+		if not frappe.get_meta("Customer").has_field("custom_installer"):
+			return
+
 		installer_user = frappe.get_value("Customer", self.customer, "custom_installer")
 		# frappe.msgprint("Hii")
 		# frappe.throw(str(installer_user))
