@@ -209,7 +209,11 @@ doc_events = {
             "justsign_custom.public.py.purchase_invoice.validate_custom_discount",
             "justsign_custom.public.py.purchase_invoice.apply_freight_tds",
         ],
-        "on_submit": "justsign_custom.public.py.purchase_invoice.create_discount_reconciliation_journal_entries",
+        "on_submit": [
+            "justsign_custom.public.py.purchase_invoice.create_discount_reconciliation_journal_entries",
+            "justsign_custom.public.py.purchase_invoice.create_linked_purchase_receipt_returns",
+        ],
+        "on_cancel": "justsign_custom.public.py.purchase_invoice.cancel_linked_purchase_receipt_returns",
     },
     "Quotation": {
         "on_submit":[

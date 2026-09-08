@@ -4,8 +4,10 @@ from frappe.utils import cint, flt
 from erpnext.accounts.doctype.payment_reconciliation.payment_reconciliation import reconcile_dr_cr_note
 from erpnext.accounts.doctype.tax_withholding_category.tax_withholding_category import (
     get_party_details,
+    get_tax_row_for_tds,
     get_tax_withholding_rates,
     get_tax_withholding_details,
+    normal_round,
 )
 
 TDS_ON_CHARGES_ROW_PREFIX = "TDS on Charges - "
@@ -75,23 +77,23 @@ def apply_freight_tds(doc, method=None):
             continue
 
         if cint(tax_details.round_off_tax_amount):
-            tax_amount = round(tax_amount)
+            tax_amount = normal_round(tax_amount)
 
-        doc.append(
-            "taxes",
+        # Keep the generated deduction row identical to ERPNext's Supplier TDS
+        # row. Only the taxable base is custom: it is the selected charge row(s),
+        # rather than the invoice item net total.
+        tds_row = get_tax_row_for_tds(tax_details, tax_amount)
+        tds_row.update(
             {
-                "category": "Total",
-                "add_deduct_tax": "Deduct",
-                "charge_type": "Actual",
-                "account_head": tax_details.account_head,
-                "description": f"{TDS_ON_CHARGES_ROW_PREFIX}{tax_details.description}",
-                "tax_amount": tax_amount,
+                "description": f"{TDS_ON_CHARGES_ROW_PREFIX}{tds_row.get('description') or ''}",
+                "tax_withholding_category": category,
                 "cost_center": values.get("cost_center") or get_default_cost_center(doc),
                 "is_tax_withholding_account": 1,
                 "custom_is_freight_tds_row": 1,
                 "custom_tds_source_description": ", ".join(values["source_descriptions"])[:140],
-            },
+            }
         )
+        doc.append("taxes", tds_row)
 
     if any(row.get("custom_is_freight_tds_row") for row in doc.taxes):
         doc.calculate_taxes_and_totals()
@@ -490,6 +492,269 @@ def create_discount_reconciliation_journal_entries(doc, method=None):
             ],
             doc.company,
         )
+
+
+def create_linked_purchase_receipt_returns(doc, method=None):
+    if isinstance(doc, str):
+        doc = frappe.get_doc("Purchase Invoice", doc)
+
+    if not doc.get("is_return") or not doc.get("custom_with_stock"):
+        return
+
+    source_invoice = get_return_source_purchase_invoice(doc)
+    receipt_items_by_receipt = get_return_receipt_items_by_receipt(doc, source_invoice)
+    if not receipt_items_by_receipt:
+        frappe.throw(
+            "With Stock is checked, but no linked Purchase Receipt rows were found for this debit note."
+        )
+
+    for purchase_receipt, return_items in receipt_items_by_receipt.items():
+        if linked_purchase_receipt_return_exists(doc.name, purchase_receipt):
+            continue
+
+        purchase_return = make_linked_purchase_receipt_return(
+            doc,
+            purchase_receipt,
+            return_items,
+        )
+        purchase_return.flags.ignore_permissions = True
+        purchase_return.insert(ignore_permissions=True)
+        purchase_return.submit()
+
+
+def cancel_linked_purchase_receipt_returns(doc, method=None):
+    if isinstance(doc, str):
+        doc = frappe.get_doc("Purchase Invoice", doc)
+
+    if not doc.get("is_return"):
+        return
+
+    for purchase_return in get_linked_purchase_receipt_returns(doc.name):
+        purchase_return_doc = frappe.get_doc("Purchase Receipt", purchase_return.name)
+        if purchase_return_doc.docstatus == 1:
+            purchase_return_doc.flags.ignore_permissions = True
+            purchase_return_doc.cancel()
+
+
+def get_return_source_purchase_invoice(doc):
+    if not doc.get("return_against"):
+        return None
+
+    return frappe.get_doc("Purchase Invoice", doc.return_against)
+
+
+def get_return_receipt_items_by_receipt(doc, source_invoice=None):
+    source_items = {
+        row.name: row
+        for row in (source_invoice.get("items") if source_invoice else [])
+    }
+    receipt_items_by_po_detail = get_purchase_receipt_items_by_po_detail(doc, source_items)
+    receipt_items_by_receipt = {}
+
+    for row in doc.get("items", []):
+        source_row = source_items.get(row.get("purchase_invoice_item")) or row
+        receipt_item_refs = get_purchase_receipt_item_refs(
+            row,
+            source_row,
+            receipt_items_by_po_detail,
+        )
+
+        if not receipt_item_refs:
+            continue
+
+        for receipt_ref in receipt_item_refs:
+            factor = receipt_ref.get("factor") or 1
+            purchase_receipt = receipt_ref.purchase_receipt
+            pr_detail = receipt_ref.pr_detail
+            receipt_items_by_receipt.setdefault(purchase_receipt, {})
+            receipt_item = receipt_items_by_receipt[purchase_receipt].setdefault(
+                pr_detail,
+                frappe._dict(
+                    {
+                        "qty": 0,
+                        "received_qty": 0,
+                        "rejected_qty": 0,
+                        "stock_qty": 0,
+                        "amount": 0,
+                        "base_amount": 0,
+                        "net_amount": 0,
+                        "base_net_amount": 0,
+                    }
+                ),
+            )
+            receipt_item.qty += flt(row.get("qty")) * factor
+            receipt_item.received_qty += (flt(row.get("received_qty")) or flt(row.get("qty"))) * factor
+            receipt_item.rejected_qty += flt(row.get("rejected_qty")) * factor
+            receipt_item.stock_qty += flt(row.get("stock_qty")) * factor
+            receipt_item.amount += flt(row.get("amount")) * factor
+            receipt_item.base_amount += flt(row.get("base_amount")) * factor
+            receipt_item.net_amount += flt(row.get("net_amount")) * factor
+            receipt_item.base_net_amount += flt(row.get("base_net_amount")) * factor
+
+    return receipt_items_by_receipt
+
+
+def get_purchase_receipt_items_by_po_detail(doc, source_items):
+    po_details = set()
+    for row in doc.get("items", []):
+        source_row = source_items.get(row.get("purchase_invoice_item")) or row
+        po_detail = row.get("po_detail") or source_row.get("po_detail")
+        if po_detail and not (row.get("purchase_receipt") or source_row.get("purchase_receipt")):
+            po_details.add(po_detail)
+
+    if not po_details:
+        return {}
+
+    receipt_items = frappe.db.sql(
+        """
+        select item.name, item.parent, item.purchase_order_item, item.qty
+        from `tabPurchase Receipt Item` item
+        inner join `tabPurchase Receipt` receipt
+            on receipt.name = item.parent
+        where item.purchase_order_item in %(po_details)s
+            and receipt.docstatus = 1
+            and ifnull(receipt.is_return, 0) = 0
+        order by item.creation asc
+        """,
+        {"po_details": tuple(po_details)},
+        as_dict=True,
+    )
+
+    receipt_items_by_po_detail = {}
+    for row in receipt_items:
+        receipt_items_by_po_detail.setdefault(row.purchase_order_item, []).append(row)
+
+    return receipt_items_by_po_detail
+
+
+def get_purchase_receipt_item_refs(row, source_row, receipt_items_by_po_detail):
+    purchase_receipt = row.get("purchase_receipt") or source_row.get("purchase_receipt")
+    pr_detail = row.get("pr_detail") or source_row.get("pr_detail")
+    if purchase_receipt and pr_detail:
+        return [
+            frappe._dict(
+                {
+                    "purchase_receipt": purchase_receipt,
+                    "pr_detail": pr_detail,
+                    "factor": 1,
+                }
+            )
+        ]
+
+    po_detail = row.get("po_detail") or source_row.get("po_detail")
+    receipt_items = receipt_items_by_po_detail.get(po_detail, [])
+    if not receipt_items:
+        return []
+
+    return allocate_purchase_receipt_item_refs(row, receipt_items)
+
+
+def allocate_purchase_receipt_item_refs(row, receipt_items):
+    qty_to_return = abs(flt(row.get("qty")))
+    if not qty_to_return:
+        return []
+
+    receipt_refs = []
+    remaining_qty = qty_to_return
+    for receipt_item in receipt_items:
+        receipt_qty = abs(flt(receipt_item.qty))
+        if not receipt_qty:
+            continue
+
+        allocated_qty = min(remaining_qty, receipt_qty)
+        if not allocated_qty:
+            break
+
+        receipt_refs.append(
+            frappe._dict(
+                {
+                    "purchase_receipt": receipt_item.parent,
+                    "pr_detail": receipt_item.name,
+                    "factor": allocated_qty / qty_to_return,
+                }
+            )
+        )
+        remaining_qty -= allocated_qty
+
+    return receipt_refs
+
+
+def linked_purchase_receipt_return_exists(purchase_invoice, purchase_receipt):
+    return bool(get_linked_purchase_receipt_returns(purchase_invoice, purchase_receipt))
+
+
+def get_linked_purchase_receipt_returns(purchase_invoice, purchase_receipt=None):
+    conditions = ""
+    values = {
+        "remarks": f"%Auto-created from Purchase Invoice {purchase_invoice}%",
+    }
+    if purchase_receipt:
+        conditions = "and return_against = %(purchase_receipt)s"
+        values["purchase_receipt"] = purchase_receipt
+
+    return frappe.db.sql(
+        f"""
+        select name, return_against
+        from `tabPurchase Receipt`
+        where is_return = 1
+            and docstatus < 2
+            and remarks like %(remarks)s
+            {conditions}
+        """,
+        values,
+        as_dict=True,
+    )
+
+
+def make_linked_purchase_receipt_return(doc, purchase_receipt, return_items):
+    from erpnext.controllers.sales_and_purchase_return import make_return_doc
+
+    purchase_return = make_return_doc("Purchase Receipt", purchase_receipt)
+    purchase_return.posting_date = doc.posting_date
+    purchase_return.posting_time = doc.posting_time
+    purchase_return.set_posting_time = doc.set_posting_time
+    purchase_return.remarks = (
+        f"Auto-created from Purchase Invoice {doc.name}"
+    )
+
+    filtered_items = []
+    for item in purchase_return.get("items", []):
+        return_item = return_items.get(item.get("purchase_receipt_item"))
+        if not return_item:
+            continue
+
+        set_purchase_receipt_return_item_qty(item, return_item)
+        filtered_items.append(item)
+
+    purchase_return.set("items", filtered_items)
+    if not purchase_return.get("items"):
+        frappe.throw(
+            f"No matching rows found to create Purchase Receipt return for {purchase_receipt}."
+        )
+
+    purchase_return.run_method("set_missing_values")
+    purchase_return.run_method("calculate_taxes_and_totals")
+    return purchase_return
+
+
+def set_purchase_receipt_return_item_qty(item, return_item):
+    item.qty = -abs(flt(return_item.qty))
+    # A Purchase Receipt return may only return accepted stock. ERPNext validates
+    # that received_qty equals qty + rejected_qty, and does not allow a non-zero
+    # rejected_qty on a return. The Purchase Invoice's received/rejected values
+    # cannot be copied independently without violating those constraints.
+    item.rejected_qty = 0
+    item.received_qty = item.qty
+
+    if item.get("stock_qty") is not None:
+        item.stock_qty = -abs(flt(return_item.stock_qty) or flt(item.qty) * flt(item.conversion_factor))
+
+    if item.get("received_stock_qty") is not None:
+        item.received_stock_qty = item.stock_qty
+
+    for fieldname in ("amount", "base_amount", "net_amount", "base_net_amount"):
+        if item.get(fieldname) is not None:
+            item.set(fieldname, -abs(flt(return_item.get(fieldname))))
 
 
 def _discount_reconciliation_exists(doc, row, payable_account):
